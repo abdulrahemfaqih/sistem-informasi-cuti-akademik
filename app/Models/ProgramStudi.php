@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Fakultas;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProgramStudi extends Model
 {

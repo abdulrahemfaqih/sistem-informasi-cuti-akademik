@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('admin_fakultas', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->ulid('fakultas_id');
+            $table->ulid('user_id');
+            $table->foreign('fakultas_id')->references('id')->on('fakultas');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
