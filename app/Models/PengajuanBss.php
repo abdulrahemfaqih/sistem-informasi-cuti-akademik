@@ -2,7 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Semester;
+use App\Models\Mahasiswa;
+use App\Models\TahunAjaran;
+use App\Models\DokumenPendukung;
+use App\Models\SuratKeteranganCuti;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PengajuanBss extends Model
 {

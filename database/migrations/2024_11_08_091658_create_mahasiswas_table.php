@@ -11,8 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
-            $table->id();
+        Schema::create('mahasiswa', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('nim')->unique();
+            $table->string('angkatan');
+            $table->date('tanggal_masuk');
+            $table->enum('status', ['aktif', 'tidak aktif', 'lulus']);
+            $table->string('alamat');
+            $table->ulid('program_studi_id');
+            $table->ulid('user_id');
+            $table->foreign('program_studi_id')->references('id')->on('program_studi');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

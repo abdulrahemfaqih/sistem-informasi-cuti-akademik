@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('surat_keterangan_cutis', function (Blueprint $table) {
-            $table->id();
+        Schema::create('surat_keterangan_cuti', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->ulid('pengajuan_bss_id');
+            $table->string('path_file');
+            $table->string('nama_file');
+            $table->date('tanggal_terbit');
             $table->timestamps();
+            $table->foreign('pengajuan_bss_id')->references('id')->on('pengajuan_bss');
         });
     }
 

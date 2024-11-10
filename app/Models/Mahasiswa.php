@@ -2,7 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\PengajuanBss;
+use App\Models\ProgramStudi;
+use App\Models\HistoriMahasiswa;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mahasiswa extends Model
 {

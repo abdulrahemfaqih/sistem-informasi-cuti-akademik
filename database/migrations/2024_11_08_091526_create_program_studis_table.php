@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('program_studis', function (Blueprint $table) {
-            $table->id();
+        Schema::create('program_studi', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('nama');
+            $table->ulid('fakultas_id');
+            $table->foreign('fakultas_id')->references('id')->on('fakultas');
             $table->timestamps();
         });
     }
