@@ -85,18 +85,6 @@
                 @enderror
             </div>
 
-            <!-- Remember Me Checkbox -->
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <input id="remember_me" name="remember_me" type="checkbox"
-                        class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="remember_me" class="ml-2 text-sm text-gray-600">Remember me</label>
-                </div>
-
-                <div>
-                    <a href="#" class="text-sm text-blue-600 hover:underline">Lost Password?</a>
-                </div>
-            </div>
 
             <!-- Submit Button -->
             <div>
@@ -106,10 +94,6 @@
                 </button>
             </div>
 
-            <!-- Register Link -->
-            <p class="text-sm text-center text-gray-600">
-                Not registered? <a href="/register" class="text-blue-600 hover:underline">Create account</a>
-            </p>
         </form>
     </div>
      <script>

@@ -12,7 +12,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             return $this->redirectBasedOnRole(Auth::user());
         }
-        return redirect()->route('login');
+        return redirect()->route('login.form');
     }
 
     private function redirectBasedOnRole($user)

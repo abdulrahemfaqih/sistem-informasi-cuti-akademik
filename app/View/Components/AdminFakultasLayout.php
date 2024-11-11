@@ -21,6 +21,6 @@ class AdminFakultasLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin-fakultas-layout');
+        return view('layouts.admin_fakultas.app');
     }
 }

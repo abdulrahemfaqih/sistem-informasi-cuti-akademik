@@ -50,8 +50,8 @@ class User extends Authenticatable
         return $this->hasOne(Mahasiswa::class);
     }
 
-    public function staffFakultas()
+    public function adminFakultas()
     {
-        return $this->hasOne(StaffFakultas::class);
+        return $this->hasOne(AdminFakultas::class);
     }
 }

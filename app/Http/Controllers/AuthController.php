@@ -17,8 +17,10 @@ class AuthController extends Controller
     }
     public function store(LoginRequest $request)
     {
+
         if (Auth::attempt($request->only('username', 'password'))) {
             $request->session()->regenerate();
+            // dd(Auth::user());
             return $this->redirectBasedOnRole(Auth::user());
         }
 
@@ -35,13 +37,23 @@ class AuthController extends Controller
             case 'admin_bak':
                 return redirect()->route('admin.bak.dashboard');
             case 'admin_fakultas':
+
                 return redirect()->route('admin.fakultas.dashboard');
             case 'mahasiswa':
                 return redirect()->route('mahasiswa.dashboard');
             default:
+
                 Auth::logout();
                 return redirect()->route('login')
-                ->withErrors(['msg' => 'Role tidak valid']);
+                    ->withErrors(['msg' => 'Role tidak valid']);
         }
+    }
+
+    public function destroy(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }
