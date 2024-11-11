@@ -21,6 +21,6 @@ class MahasiswaLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.mahasiswa-layout');
+        return view('layouts.mahasiswa.app');
     }
 }

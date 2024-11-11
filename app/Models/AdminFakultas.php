@@ -23,4 +23,8 @@ class AdminFakultas extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getNamaFakultasAttribute() {
+        return $this->fakultas->nama;
+    }
 }

@@ -47,12 +47,12 @@ class DatabaseSeeder extends Seeder
 
         $programStudis = DB::table('program_studi')->get();
 
-        $totalMahasiswa = $programStudis->count() * 20;
+        $totalMahasiswa = $programStudis->count() * 10;
         $this->command->info("proses mengisi data mahasiswa sebanyak $totalMahasiswa");
         $this->command->getOutput()->progressStart($totalMahasiswa);
 
         foreach ($programStudis as $prodi) {
-            for ($i = 0; $i < 20; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 Mahasiswa::factory()->create([
                     'program_studi_id' => $prodi->id,
                 ]);

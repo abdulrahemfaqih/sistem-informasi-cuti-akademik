@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class AdminBakLayout extends Component
+class SidebarIcon extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class AdminBakLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.admin_bak.app');
+        return view('components.sidebar-icon');
     }
 }
