@@ -27,4 +27,6 @@ class AdminFakultas extends Model
     public function getNamaFakultasAttribute() {
         return $this->fakultas->nama;
     }
+
+    
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin_fakultas', 'admin_bak', 'mahasiswa']);
+            $table->enum('role', ['admin_fakultas', 'admin_bak', 'mahasiswa', 'admin_perpus', 'admin_lab']);
             $table->rememberToken();
             $table->timestamps();
         });

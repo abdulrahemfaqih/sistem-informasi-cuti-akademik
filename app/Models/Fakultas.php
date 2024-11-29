@@ -18,4 +18,9 @@ class Fakultas extends Model
     {
         return $this->hasMany(ProgramStudi::class);
     }
+
+    public function tanggunganFakultas()
+    {
+        return $this->hasMany(TanggunganFakultas::class);
+    }
 }

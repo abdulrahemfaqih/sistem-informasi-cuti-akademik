@@ -37,5 +37,15 @@ class Mahasiswa extends Model
     {
         return $this->hasMany(PengajuanBss::class);
     }
+
+    public function tanggunganLab()
+    {
+        return $this->hasMany(TanggunganLab::class);
+    }
+
+    public function tanggunganFakultas()
+    {
+        return $this->hasMany(TanggunganFakultas::class);
+    }
 }
 
