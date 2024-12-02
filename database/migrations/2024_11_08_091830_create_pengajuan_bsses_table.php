@@ -18,11 +18,9 @@ return new class extends Migration
             $table->ulid('semester_id');
             $table->text('alasan');
             $table->date('diajukan_pada');
-            $table->date('perlu_perbaikan_pada')->nullable();
-            $table->date('telah_diperbaiki_pada')->nullable();
             $table->date('disetujui_pada')->nullable();
             $table->date('ditolak_pada')->nullable();
-            $table->enum('status', ['diajukan', 'perlu-perbaikan', 'telah-diperbaiki', 'disetujui', 'ditolak', 'dibatalkan']);
+            $table->enum('status', ['diajukan', 'disetujui', 'ditolak']);
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->foreign('semester_id')->references('id')->on('semester');
