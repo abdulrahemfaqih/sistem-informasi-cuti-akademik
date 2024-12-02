@@ -21,10 +21,11 @@ class DatabaseSeeder extends Seeder
         if (Fakultas::count() === 0) {
             $this->call(FakprogSeeder::class);
         }
+
         User::create([
-            "name" => "jokosuwardo",
-            "username" => "jokosuwardo",
-            'email' => 'admin_bak@gmail.com',
+            'name' => 'Pak Faqih',
+            'username' => 'faqih',
+            'email' => 'faqih3935@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'admin_bak',
         ]);
@@ -66,5 +67,48 @@ class DatabaseSeeder extends Seeder
 
         $this->command->getOutput()->progressFinish();
         $this->command->info("Selesai mengisi data mahasiswa.");
+
+        // seeder untuk mahasiswa dan email asli
+        $user1 = User::create([
+            'name' => 'Ilham Zakaria',
+            'username' => '220411100100',
+            'email' =>'ilhamzakaria3024@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'mahasiswa',
+        ]);
+        Mahasiswa::create([
+            'nim' => '220411100100',
+            'angkatan' => 22,
+            'tanggal_masuk' => '2022-09-01',
+            'status' => 'aktif',
+            'alamat' => 'Jl. Jalan',
+            'program_studi_id' => '01jcb36304g2zt0yby2wb1w0h3',
+            'user_id' => $user1->id,
+        ]);
+
+
+        $user2 = User::create([
+            'name' => 'Kun Fadhilah',
+            'username' => '220411100035',
+            'email' => 'kunfadhilaha@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'mahasiswa',
+        ]);
+        Mahasiswa::create([
+            'nim' => '220411100035',
+            'angkatan' => 22,
+            'tanggal_masuk' => '2022-09-01',
+            'status' => 'aktif',
+            'alamat' => 'Jl. Jalan',
+            'program_studi_id' => '01jcb36304g2zt0yby2wb1w0h3',
+            'user_id' => $user2->id,
+        ]);
+
+
+
+
+
     }
+
+
 }
