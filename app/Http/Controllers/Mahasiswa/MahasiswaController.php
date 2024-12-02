@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Mahasiswa;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MahasiswaDashboardController extends Controller
+class MahasiswaController extends Controller
 {
-  public function index()
+  public function pengajuanBss()
   {
-    return view('mahasiswa.dashboard');
+    return view('mahasiswa.pengajuan_bss');
   }
 }
