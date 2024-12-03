@@ -40,6 +40,15 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin_bak',
             ]);
         }
+        if (User::where('username', 'ilham')->count() === 0) {
+            User::create([
+                'name' => 'Pak Zakaria',
+                'username' => 'ilham',
+                'email' => 'ilham@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'admin_fakultas',
+            ]);
+        }
         if (Mahasiswa::count() === 0) {
             $programStudis = DB::table('program_studi')->get();
 

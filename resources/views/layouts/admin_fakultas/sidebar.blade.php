@@ -37,33 +37,13 @@
                         </x-sidebar-link>
                     </li>
 
-                    {{-- Tembusan --}}
                     <li>
-                        <x-sidebar-dropdown label="Tembusan BSS" id="bss" :active="request()->is('admin_fakultas/tembusanBSS*') ||
-                            request()->is('admin_fakultas/data-tembusan-bss/baru') ||
-                            request()->is('admin_fakultas/data-tembusan-bss/histori')">
+                        <x-sidebar-link href="{{ route('admin.fakultas.data-tembusan-bss-baru') }}" :active="request()->is('admin_fakultas/tembusanBSS*')">
                             <x-sidebar-icon>
-                                <path
-                                    d="M1 6v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2Zm2-1h18a1 1 0 0 1 .992.876L12 11.798 2.008 5.876A1 1 0 0 1 3 5Zm18 14H3a1 1 0 0 1-1-1V7.095l9.91 5.911a1 1 0 0 0 1.018 0L22 7.095V18a1 1 0 0 1-1 1Z" />
+                                <path d="M1 6v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2Zm2-1h18a1 1 0 0 1 .992.876L12 11.798 2.008 5.876A1 1 0 0 1 3 5Zm18 14H3a1 1 0 0 1-1-1V7.095l9.91 5.911a1 1 0 0 0 1.018 0L22 7.095V18a1 1 0 0 1-1 1Z" />
                             </x-sidebar-icon>
-                        </x-sidebar-dropdown>
-
-                        <x-sidebar-dropdown-list id="bss" :active="request()->is('admin_fakultas/tembusanBSS*') ||
-                            request()->is('admin_fakultas/data-tembusan-bss/baru') ||
-                            request()->is('admin_fakultas/data-tembusan-bss/histori')">
-                    <li>
-                        <x-sidebar-dropdown-list-link href="{{ route('admin.fakultas.data-tembusan-bss-baru') }}"
-                            :active="request()->is('admin_fakultas/data-tembusan-bss/baru')">
-                            Baru
-                        </x-sidebar-dropdown-list-link>
-                    </li>
-                    <li>
-                        <x-sidebar-dropdown-list-link href="{{ route('admin.fakultas.data-tembusan-bss-histori') }}"
-                            :active="request()->is('admin_fakultas/data-tembusan-bss/histori')">
-                            Data Tembusan
-                        </x-sidebar-dropdown-list-link>
-                    </li>
-                    </x-sidebar-dropdown-list>
+                            <span class="ml-3" sidebar-toggle-item>Tembusan BSS</span>
+                        </x-sidebar-link>
                     </li>
                 </ul>
 

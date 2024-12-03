@@ -3,17 +3,14 @@
 namespace App\Http\Controllers\AdminFakultas;
 
 use App\Http\Controllers\Controller;
+use App\Models\PengajuanBss;
 use Illuminate\Http\Request;
 
 class DataTembusanBssController extends Controller
 {
-    public function dataTembusanBssBaru()
+    public function dataTembusanBss()
     {
-        return view('admin_fakultas.data_tembusan_bss.baru');
-    }
-
-    public function dataTembusanBssHistori()
-    {
-        return view('admin_fakultas.data_tembusan_bss.histori');
+        $tembusan = PengajuanBss::with(['mahasiswa', 'tahunAjaran', 'semester' ])->get();
+        return view('admin_fakultas.data_tembusan_bss', compact('tembusan'));
     }
 }
