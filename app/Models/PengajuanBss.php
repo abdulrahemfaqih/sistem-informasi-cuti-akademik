@@ -18,6 +18,7 @@ class PengajuanBss extends Model
 
     protected $table = 'pengajuan_bss';
     protected $guarded = [];
+    public $timestamps = false;
 
 
 
