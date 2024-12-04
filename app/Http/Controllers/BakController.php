@@ -73,7 +73,7 @@ class BakController extends Controller
             ]);
 
             // Rest of your existing approval logic (PDF generation, email, etc.)
-            $noSurat = '1234';
+            $noSurat = 'B/35555/UN46.1/KM.00.01/2024';
             $dataCuti = PengajuanBss::with([
                 'mahasiswa',
                 'mahasiswa.user',
@@ -107,6 +107,7 @@ class BakController extends Controller
                 'tanggalTerbit' => now(),
                 'tahunAkademikKembali' => $tahunAkademikKembali->tahun_ajaran,
                 'semesterKembali' => $semesterKembali->semester,
+                'fakultas' => $dataCuti->mahasiswa->prodi->fakultas->nama,
             ]);
 
             $pathFile = 'surat_bss/' . time() . '_surat_keterangan_cuti_' . $nimMahasiswa . '.pdf';
@@ -121,7 +122,7 @@ class BakController extends Controller
                 'path_file' => $pathFile,
                 'tahun_ajaran_masuk_id' => $tahunAkademikKembali->id,
                 'semester_masuk_id' => $semesterKembali->id,
-                'tanggal_terbit' => now()
+                'tanggal_terbit' => now()->format('d M Y')
             ]);
 
             HistoriMahasiswa::create([

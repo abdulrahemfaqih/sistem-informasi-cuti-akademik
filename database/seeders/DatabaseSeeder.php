@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
         if (TanggunganPerpustakaan::count() == 0) {
             $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
             $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
-        
+
             if ($fakultasIds->isNotEmpty()) {
                 foreach ($mahasiswaIds as $key => $mahasiswaId) {
                     DB::table('tanggungan_perpustakaan')->insert([
@@ -139,7 +139,7 @@ class DatabaseSeeder extends Seeder
         if (TanggunganLab::count() == 0) {
             $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
             $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
-        
+
             if ($fakultasIds->isNotEmpty()) {
                 foreach ($mahasiswaIds as $key => $mahasiswaId) {
                     DB::table('tanggungan_lab')->insert([

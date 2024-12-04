@@ -18,12 +18,10 @@ return new class extends Migration
       $table->ulid('semester_id');
       $table->text('alasan');
       $table->text('catatan')->nullable()->default(null);
-      $table->date('diajukan_pada')->nullable()->default(null);
+      $table->date('diajukan_pada')->nullable()->default(null)->nullable()->default(null);
       $table->date('disetujui_pada')->nullable()->default(null);
       $table->date('ditolak_pada')->nullable()->default(null);
       $table->text('alasan_penolakan')->nullable()->default(null);
-      $table->text('path_file')->nullable()->default(null);
-      $table->string('name_file')->nullable()->default(null);
       $table->enum('status', ['belum lengkap', 'diajukan', 'disetujui', 'ditolak'])->default('belum lengkap');
       $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
       $table->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
