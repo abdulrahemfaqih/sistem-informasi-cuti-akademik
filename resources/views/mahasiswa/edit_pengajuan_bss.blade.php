@@ -1,7 +1,11 @@
 <x-mahasiswa-layout>
   <div class="px-3 py-5 mx-4 my-6 bg-white rounded-lg shadow xl:p-6">
     @php
-      $breadcrumbs = [['label' => 'Dashboard', 'route' => route('mahasiswa.dashboard')], ['label' => 'Pengajuan BSS']];
+      $breadcrumbs = [
+          ['label' => 'Dashboard', 'route' => route('mahasiswa.dashboard')],
+          ['label' => 'Pengajuan BSS', 'route' => route('mahasiswa.bss.index')],
+          ['label' => 'Edit'],
+      ];
     @endphp
     <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
@@ -13,6 +17,24 @@
         @csrf
         @method('PUT')
         <div class="grid gap-4 mb-4 grid-cols-2">
+          <div class="col-span-2">
+            <div
+              class="flex items-center p-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
+              role="alert">
+              <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+              </svg>
+              <span class="sr-only">Info</span>
+              <div class="ms-3 text-sm font-medium">
+                Silahkan unduh Surat Permohonan Berhenti Studi Sementara (BSS) <a
+                  href="{{ route('mahasiswa.bss.cetak', $pengajuanBss->id) }}"
+                  class="font-semibold underline hover:no-underline" target="_blank">disini</a>, kemudian unggah kembali
+                setelah semua data terisi.
+              </div>
+            </div>
+          </div>
           <div class="col-span-2 sm:col-span-1">
             <div class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">NIM</div>
             <div
@@ -68,7 +90,7 @@
             @enderror
           </div>
           <div class="col-span-2 sm:col-span-1">
-            <label for="kartu_mahasiswa" class="block text-sm font-medium text-gray-900 dark:text-white">Fotocopy Kartu
+            <label for="kartu_mahasiswa" class="block text-sm font-medium text-gray-900 dark:text-white">Kartu
               Mahasiswa <span class="text-red-500">*</span></label>
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-2">Format: .jpg, .jpeg, .png, .pdf | Maksimal ukuran
               2MB</p>

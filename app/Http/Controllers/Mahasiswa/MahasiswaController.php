@@ -6,9 +6,12 @@ use App\Models\Semester;
 use App\Models\TahunAjaran;
 use App\Models\PengajuanBss;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\DokumenPendukung;
-use App\Http\Controllers\Controller;
 use App\Models\HistoriMahasiswa;
+use App\Http\Controllers\Controller;
+use App\Models\Mahasiswa;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -45,6 +48,10 @@ class MahasiswaController extends Controller
 
     $request->validate($rules, $messages);
 
+    if (Mahasiswa::where('id', auth()->user()->mahasiswa->id)->where('status', 'aktif')->doesntExist()) {
+      return redirect()->route('mahasiswa.bss.index')->with('error', 'Maaf, Anda tidak dapat mengajukan cuti karena status mahasiswa tidak aktif.');
+    }
+
     $statusList = ['belum lengkap', 'diajukan', 'disetujui'];
 
     foreach ($statusList as $status) {
@@ -70,6 +77,21 @@ class MahasiswaController extends Controller
       'tahun_ajaran_id' => $request->tahun_ajaran_id,
       'alasan' => $request->alasan,
     ]);
+
+    // $pdf = Pdf::loadView('mahasiswa.surat_permohonan_bss', [
+    //   'pengajuanBss' => $pengajuanBss,
+    // ]);
+
+    // $nim = auth()->user()->mahasiswa->nim;
+
+    // $pathFile = 'surat_bss/' . time() . '_surat_permohonan_bss_' . $nim . '.pdf';
+    // $namaFile = $nim .  '_surat_permohonan_bss.pdf';
+    // Storage::disk('public')->put($pathFile, $pdf->output());
+
+    // $pengajuanBss->update([
+    //   'path_file' => $pathFile,
+    //   'name_file' => $namaFile,
+    // ]);
 
     return redirect()->route('mahasiswa.bss.edit', ['IdPengajuanBss' => $pengajuanBss->id])->with('success', 'Anda memenuhi syarat untuk mengajukan cuti. Silahkan lengkapi data dokumen pendukung untuk pengajuan cuti.');
   }
@@ -157,5 +179,12 @@ class MahasiswaController extends Controller
     ]);
 
     return redirect()->route('mahasiswa.bss.index')->with('success', 'Pengajuan cuti berhasil diajukan! Silahkan tunggu konfirmasi persetujuan dari pihak BAK.');
+  }
+
+  public function cetakBss($IdPengajuanBss)
+  {
+    $pengajuanBss = PengajuanBss::findOrFail($IdPengajuanBss);
+
+    return view('mahasiswa.surat_permohonan_bss', compact('pengajuanBss'));
   }
 }
