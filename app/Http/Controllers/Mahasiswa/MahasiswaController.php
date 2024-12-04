@@ -20,8 +20,15 @@ class MahasiswaController extends Controller
         $pengajuanBss = PengajuanBss::where('mahasiswa_id', auth()->user()->mahasiswa->id)->latest()->get();
         $semesterAktif = Semester::where('status', 'aktif')->first() ?? null;
 
-        return view('mahasiswa.pengajuan_bss', compact('pengajuanBss', 'semesterAktif'));
-    }
+    return view('mahasiswa.pengajuan_bss', compact('pengajuanBss', 'semesterAktif'));
+  }
+
+  public function showBss($IdPengajuanBss)
+  {
+    $pengajuanBss = PengajuanBss::findOrFail($IdPengajuanBss);
+
+    return view('mahasiswa.detail_pengajuan_bss', compact('pengajuanBss'));
+  }
 
     public function storeBss(Request $request)
     {
