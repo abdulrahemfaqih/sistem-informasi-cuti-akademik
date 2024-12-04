@@ -5,5 +5,7 @@
         @endphp
         <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
+        
     </div>
+
 </x-mahasiswa-layout>

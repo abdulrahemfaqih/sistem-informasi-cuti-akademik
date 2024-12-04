@@ -25,7 +25,11 @@ Route::middleware('auth')->group(function () {
   Route::prefix('admin_bak')->group(function () {
     Route::get('/dashboard', [BakController::class, 'dashboard'])->name('admin.bak.dashboard');
     Route::get('/pengajuan-bss', [BakController::class, 'pengajuanBss'])->name('admin.bak.pengajuan-bss');
+    Route::get('/pengajuan-bss/{id}', [BakController::class, 'detailPengajuanBss'])->name('admin.bak.detail-pengajuan-bss');
+    Route::patch('/pengajuan-bss/{id}/approve', [BakController::class, 'approvePengajuanBss'])->name('admin.bak.approve-pengajuan-bss');
+    Route::patch('/pengajuan-bss/{id}/reject', [BakController::class, 'rejectPengajuanBss'])->name('admin.bak.reject-pengajuan-bss');
     Route::get('/daftar-mahasiswa-cuti', [BakController::class, 'daftarMahasiswaCuti'])->name('admin.bak.daftar-mahasiswa-cuti');
+    Route::get('/detail-mahasiswa-cuti/{id}', [BakController::class, 'detailCutiMahasiswa'])->name('admin.bak.detail-mahasiswa-cuti');
   });
 });
 

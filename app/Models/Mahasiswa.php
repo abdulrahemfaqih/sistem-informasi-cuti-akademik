@@ -20,7 +20,7 @@ class Mahasiswa extends Model
 
     public function prodi()
     {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id', 'id');
     }
 
     public function user()
@@ -46,6 +46,16 @@ class Mahasiswa extends Model
     public function tanggunganFakultas()
     {
         return $this->hasMany(TanggunganFakultas::class);
+    }
+
+    public function tanggunganPerpustakaan()
+    {
+        return $this->hasMany(TanggunganPerpustakaan::class);
+    }
+
+    public function suratKeteranganCuti()
+    {
+        return $this->hasMany(SuratKeteranganCuti::class);
     }
 }
 

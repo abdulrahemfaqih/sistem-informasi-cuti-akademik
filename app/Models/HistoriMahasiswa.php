@@ -6,6 +6,8 @@ use App\Models\Semester;
 use App\Models\Mahasiswa;
 use App\Models\TahunAjaran;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class HistoriMahasiswa extends Model
 {
@@ -29,4 +31,10 @@ class HistoriMahasiswa extends Model
     {
         return $this->belongsTo(TahunAjaran::class);
     }
+
+    public function suratKeteranganCuti()
+    {
+        return $this->belongsTo(SuratKeteranganCuti::class, 'fk_surat_keterangan_cuti');
+    }
+
 }
