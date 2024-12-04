@@ -20,6 +20,13 @@ class MahasiswaController extends Controller
     return view('mahasiswa.pengajuan_bss', compact('pengajuanBss', 'semesterAktif'));
   }
 
+  public function showBss($IdPengajuanBss)
+  {
+    $pengajuanBss = PengajuanBss::findOrFail($IdPengajuanBss);
+
+    return view('mahasiswa.detail_pengajuan_bss', compact('pengajuanBss'));
+  }
+
   public function storeBss(Request $request)
   {
     $rules = [
@@ -144,7 +151,10 @@ class MahasiswaController extends Controller
       ]);
     }
 
-    $pengajuanBss->update(['status' => 'diajukan']);
+    $pengajuanBss->update([
+      'diajukan_pada' => now(),
+      'status' => 'diajukan',
+    ]);
 
     return redirect()->route('mahasiswa.bss.index')->with('success', 'Pengajuan cuti berhasil diajukan! Silahkan tunggu konfirmasi persetujuan dari pihak BAK.');
   }
