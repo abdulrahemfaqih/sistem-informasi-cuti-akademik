@@ -20,9 +20,6 @@ class PengajuanBss extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-
-
-
     public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class);
