@@ -24,10 +24,18 @@ class SuratKeteranganCuti extends Model
         return $this->belongsTo(Mahasiswa::class);
     }
 
-  public function historiMahasiswa()
+    public function historiMahasiswa()
     {
         return $this->belongsTo(HistoriMahasiswa::class);
     }
 
+    public function tahunAjaran()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_masuk_id');
+    }
 
+    public function semester()
+    {
+        return $this->belongsTo(Semester::class, 'semester_masuk_id');
+    }
 }

@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
                     ]);
 
                     // Perbarui progress bar setiap ka  li data mahasiswa dibuat
-                    if ($i % 10 === 0) {
+                    if ($i % 2 === 0) {
                         $this->command->getOutput()->progressAdvance(10);
                     }
                 }
@@ -94,11 +94,11 @@ class DatabaseSeeder extends Seeder
             $this->command->getOutput()->progressFinish();
             $this->command->info("Selesai mengisi data mahasiswa.");
         }
-    
+
         if (TanggunganFakultas::count() == 0) {
             $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
             $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
-        
+
             if ($fakultasIds->isNotEmpty()) {
                 foreach ($mahasiswaIds as $key => $mahasiswaId) {
                     DB::table('tanggungan_fakultas')->insert([

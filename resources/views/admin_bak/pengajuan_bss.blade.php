@@ -9,6 +9,11 @@
         <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
         <div class="px-3 mt-6">
+            @if (session()->has('status'))
+                <x-alert-notification :color="'blue'">
+                    {{ session('status') }}
+                </x-alert-notification>
+            @endif
             <table id="data-table">
                 <thead>
                     <tr>
@@ -52,19 +57,20 @@
                 <tbody>
                     @forelse ($pengajuanBss as $index => $bss)
                         <tr>
-                            <td >{{$index + 1}}</td>
+                            <td>{{ $index + 1 }}</td>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $bss->mahasiswa->nim }}
                             </td>
-                            <td >
+                            <td>
                                 {{ $bss->mahasiswa->user->name }}
                             </td>
                             {{-- <td>{{ $bss->mahasiswa->prodi->nama }}</td> --}}
                             <td>{{ $bss->mahasiswa->prodi->nama }}</td>
-                            <td>{{ $bss->tahunAjaran->tahun_ajaran }} {{$bss->semester->semester}}</td>
-                            <td>{{$bss->diajukan_pada}}</td>
+                            <td>{{ $bss->tahunAjaran->tahun_ajaran }} {{ $bss->semester->semester }}</td>
+                            <td>{{ $bss->diajukan_pada }}</td>
                             <td>
-                                <a href="{{ route('admin.bak.detail-pengajuan-bss', $bss->id) }}" class="text-blue-500 p-2 ">Detail</a>
+                                <a href="{{ route('admin.bak.detail-pengajuan-bss', $bss->id) }}"
+                                    class="text-blue-500 p-2 ">Detail</a>
                             </td>
                         </tr>
                     @empty

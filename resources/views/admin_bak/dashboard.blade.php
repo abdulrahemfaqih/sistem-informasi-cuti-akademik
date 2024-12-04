@@ -5,5 +5,10 @@
         @endphp
         <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
+
+        <div class="px-3 mt-6">
+            
+        </div>
+
     </div>
 </x-adminbak-layout>
