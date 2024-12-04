@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nama_tanggungan');
             $table->enum('status', ['lunas', 'belum lunas']);
             $table->timestamps();
+            $table->foreign('fakultas_id')->references('id')->on('fakultas');
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
         });
     }
 

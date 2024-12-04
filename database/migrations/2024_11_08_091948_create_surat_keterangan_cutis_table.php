@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('surat_keterangan_cuti', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string('nomor_surat');
             $table->ulid('pengajuan_bss_id');
+            $table->ulid('mahasiswa_id');
             $table->string('path_file');
             $table->string('nama_file');
             $table->date('tanggal_terbit');
             $table->timestamps();
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->foreign('pengajuan_bss_id')->references('id')->on('pengajuan_bss');
         });
     }
