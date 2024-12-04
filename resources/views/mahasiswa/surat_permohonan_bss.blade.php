@@ -70,6 +70,16 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+    .line-through {
+      text-decoration: line-through;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+      }
+    }
   </style>
 </head>
 
@@ -119,12 +129,12 @@
     <div class="mb-4">
       <p>
         Mengajukan permohonan Berhenti Studi Sementara (BSS) dengan
-        alasan:
+        alasan *:
       </p>
       <ul class="list-disc list-inside">
-        <li>Sakit dan perlu istirahat/perawatan</li>
-        <li>Kerja Praktek/Dinas</li>
-        <li>Keperluan lain yang bersifat pribadi</li>
+        <li class="{{ $pengajuanBss->alasan != 1 ? 'line-through' : '' }}">Sakit dan perlu istirahat/perawatan</li>
+        <li class="{{ $pengajuanBss->alasan != 2 ? 'line-through' : '' }}">Kerja Praktek/Dinas</li>
+        <li class="{{ $pengajuanBss->alasan != 3 ? 'line-through' : '' }}">Keperluan lain yang bersifat pribadi</li>
       </ul>
       <p>untuk semester {{ $pengajuanBss->semester->semester }} tahun akademik
         {{ $pengajuanBss->tahunAjaran->tahun_ajaran }}</p>
@@ -177,6 +187,7 @@
         <li>Surat bebas perpustakaan</li>
         <li>Surat bebas tanggungan laboratorium (jika ada)</li>
       </ol>
+      <p>* Lingkari/coret salah satu</p>
     </div>
   </div>
 
