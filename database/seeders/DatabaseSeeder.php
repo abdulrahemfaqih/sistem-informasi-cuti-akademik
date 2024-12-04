@@ -49,6 +49,24 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin_fakultas',
             ]);
         }
+        if (User::where('Username', 'fais')->count() === 0){
+            User::create([
+                'name' => 'Pak Shah',
+                'username' => 'fais',
+                'email' => 'fais.shah@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'admin_perpus',
+            ]);
+        }
+        if (User::where('Username', 'qian')->count() === 0){
+            User::create([
+                'name' => 'Pak Qian',
+                'username' => 'qian',
+                'email' => 'fais.qian@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'admin_lab',
+            ]);
+        }
         if (Mahasiswa::count() === 0) {
             $programStudis = DB::table('program_studi')->get();
 

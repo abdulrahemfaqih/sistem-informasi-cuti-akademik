@@ -47,6 +47,16 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
+  Route::prefix('admin_perpus')->group(function () {
+      Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.perpus.dashboard');
+      Route::get('/data-tanggungan', [DataTanggunganController::class, 'dataTanggungan'])->name('admin.perpus.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganController::class, 'downloadPdf'])->name('admin.perpus.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganController::class, 'lunaskanData'])->name('admin.perpus.lunaskan');
+  });
+});
+
+
+Route::middleware('auth')->group(function () {
   Route::prefix('mahasiswa')->group(function () {
     Route::get('/dashboard', [MahasiswaDashboardController::class, 'index'])->name('mahasiswa.dashboard');
     Route::get('/pengajuan-bss', [MahasiswaController::class, 'pengajuanBss'])->name('mahasiswa.pengajuan-bss');
