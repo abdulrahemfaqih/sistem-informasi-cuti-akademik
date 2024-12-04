@@ -15,6 +15,7 @@
         rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script> --}}
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
