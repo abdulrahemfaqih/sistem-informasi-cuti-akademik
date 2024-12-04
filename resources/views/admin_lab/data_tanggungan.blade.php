@@ -1,4 +1,4 @@
-<x-admin-perpus-layout>
+<x-admin-lab-layout>
     <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full mb-1 p-4">
             <div class="mb-4">
@@ -40,7 +40,7 @@
                                     </td>
                                     @if ($item->status == 'belum lunas')
                                         <td class="px-4 py-2 whitespace-nowrap text-sm">
-                                            <form action="{{ route('admin.perpus.lunaskan', $item->id) }}" method="POST" class="inline-block">
+                                            <form action="{{ route('admin.lab.lunaskan', $item->id) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('PATCH')
                                                 <input type="hidden" name="status" value="Lunas">
@@ -51,7 +51,7 @@
                                         </td>
                                     @else
                                         <td class="px-4 py-2 whitespace-nowrap text-sm">
-                                            <form action="{{ route('admin.perpus.download-bebas-tanggungan', $item->id) }}" method="POST" class="inline-block">
+                                            <form action="{{ route('admin.lab.download-bebas-tanggungan', $item->id) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('GET')
                                                 <button type="submit" class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg focus:outline-none">
@@ -72,4 +72,4 @@
             </div>
         </div>
     </div>
-</x-admin-perpus-layout>
+</x-admin-lab-layout>
