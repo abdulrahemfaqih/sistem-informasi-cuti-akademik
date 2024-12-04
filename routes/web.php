@@ -9,7 +9,6 @@ use App\Http\Controllers\Mahasiswa\MahasiswaDashboardController;
 use App\Http\Controllers\AdminFakultas\DataTembusanBssController;
 use App\Http\Controllers\AdminFakultas\AdminFakultasDashboardController;
 use App\Http\Controllers\AdminFakultas\DataTanggunganController;
-use App\Http\Controllers\TahunAkademikController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -60,6 +59,26 @@ Route::middleware('auth')->group(function () {
         Route::get('/data-tanggungan/{id}/download', [DataTanggunganController::class, 'downloadPdf'])->name('admin.fakultas.download-bebas-tanggungan');
         Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganController::class, 'lunaskanData'])->name('admin.fakultas.lunaskan');
     });
+});
+
+
+Route::middleware('auth')->group(function () {
+  Route::prefix('admin_perpus')->group(function () {
+      Route::get('/dashboard', [AdminPerpusDashboardController::class, 'index'])->name('admin.perpus.dashboard');
+      Route::get('/data-tanggungan', [DataTanggunganPerpusController::class, 'dataTanggungan'])->name('admin.perpus.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganPerpusController::class, 'downloadPdf'])->name('admin.perpus.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganPerpusController::class, 'lunaskanData'])->name('admin.perpus.lunaskan');
+  });
+});
+
+
+Route::middleware('auth')->group(function () {
+  Route::prefix('admin_lab')->group(function () {
+      Route::get('/dashboard', [AdminLabDashboardController::class, 'index'])->name('admin.lab.dashboard');
+      Route::get('/data-tanggungan', [DataTanggunganLabController::class, 'dataTanggungan'])->name('admin.lab.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganLabController::class, 'downloadPdf'])->name('admin.lab.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganLabController::class, 'lunaskanData'])->name('admin.lab.lunaskan');
+  });
 });
 
 
