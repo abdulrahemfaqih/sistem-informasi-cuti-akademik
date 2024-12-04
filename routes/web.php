@@ -33,13 +33,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
 Route::middleware('auth')->group(function () {
   Route::prefix('admin_fakultas')->group(function () {
     Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.fakultas.dashboard');
-    Route::get('/data-tembusan-bss/baru', [DataTembusanBssController::class, 'dataTembusanBssBaru'])->name('admin.fakultas.data-tembusan-bss-baru');
-    Route::get('/data-tembusan-bss/histori', [DataTembusanBssController::class, 'dataTembusanBssHistori'])->name('admin.fakultas.data-tembusan-bss-histori');
+    Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss-baru');
   });
 });
 

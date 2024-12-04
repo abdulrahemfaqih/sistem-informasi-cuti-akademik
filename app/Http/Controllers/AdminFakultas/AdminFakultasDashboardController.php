@@ -11,4 +11,6 @@ class AdminFakultasDashboardController extends Controller
     {
         return view('admin_fakultas.dashboard');
     }
+
+
 }
