@@ -17,6 +17,7 @@ return new class extends Migration
             $table->ulid('tahun_ajaran_id');
             $table->ulid('semester_id');
             $table->text('alasan');
+            $table->text('catatan')->nullable()->default(null);
             $table->date('diajukan_pada');
             $table->date('disetujui_pada')->nullable()->default(null);
             $table->date('ditolak_pada')->nullable()->default(null);
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->foreign('tahun_ajaran_id')->references('id')->on('tahun_ajaran');
             $table->foreign('semester_id')->references('id')->on('semester');
+            $table->timestamps();
         });
     }
 

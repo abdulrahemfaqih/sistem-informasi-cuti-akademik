@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PengajuanBssNotification;
 use App\Models\Semester;
 use App\Models\Mahasiswa;
 use App\Models\TahunAjaran;
@@ -10,13 +11,15 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\HistoriMahasiswa;
 use App\Models\SuratKeteranganCuti;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class BakController extends Controller
 {
     public function dashboard()
     {
-        return view('admin_bak.dashboard');
+
+        return view('admin_bak.dashboard', []);
     }
 
     public function pengajuanBss()
@@ -71,22 +74,23 @@ class BakController extends Controller
                 'tahunAjaran',
                 'semester',
                 'dokumenPendukung',
-                'mahasiswa.user',
                 'mahasiswa.prodi',
                 'mahasiswa.prodi.fakultas',
             ]
         )->find($id);
 
         // menentukan tahun akademik dan semester
-        $tahunAkademikKembali = $dataCuti->tahunAjaran->tahun_ajaran;
-        $semesterKembali = $dataCuti->semester->semester;
+        $tahunAkademikKembali = $dataCuti->tahunAjaran;
+        $semesterKembali = $dataCuti->semester;
 
-        if ($semesterKembali == "Ganjil") {
+        if ($semesterKembali->semester == "Ganjil") {
             $semesterKembali = Semester::where('semester', 'Genap')->where('tahun_ajaran_id', $dataCuti->tahun_ajaran_id)->first();
-        } elseif ($semesterKembali == "Genap") {
+            dd($semesterKembali);
+        } elseif ($semesterKembali->semester == "Genap") {
             $tahunAkademikKembali = TahunAjaran::where('created_at', '>', $dataCuti->tahunAjaran->created_at)->first();
             $semesterKembali = Semester::where('semester', 'ganjil')->where('tahun_ajaran_id', $tahunAkademikKembali->id)->first();
         }
+        // dd($semesterKembali);
 
         $pdf = Pdf::loadView('admin_bak.surat_keterangan_cuti', [
             'namaMahasiswa' => $dataCuti->mahasiswa->user->name,
@@ -102,7 +106,7 @@ class BakController extends Controller
             'semesterKembali' => $semesterKembali->semester,
         ]);
 
-        $pathFile = 'surat_bss/.' . time() . '_surat_keterangan_cuti_' . $nimMahasiswa . '.pdf';
+        $pathFile = 'surat_bss/' . time() . '_surat_keterangan_cuti_' . $nimMahasiswa . '.pdf';
         $namaFile = $nimMahasiswa .  '_surat_keterangan_cuti.pdf';
         Storage::disk('public')->put($pathFile, $pdf->output());
 
@@ -125,8 +129,11 @@ class BakController extends Controller
             'status' => 'cuti',
         ]);
 
+        Mail::to($pengajuanBss->mahasiswa->user->email)
+            ->queue(new PengajuanBssNotification('disetujui', $pengajuanBss));
 
-        return redirect()->route('admin.bak.pengajuan-bss');
+
+        return redirect()->route('admin.bak.pengajuan-bss')->with('status', 'Pengajuan BSS berhasil disetujui');
     }
 
 
@@ -138,10 +145,11 @@ class BakController extends Controller
             'ditolak_pada' => now()
         ]);
 
-        return redirect()->route('admin.bak.pengajuan-bss');
+        Mail::to($pengajuanBss->mahasiswa->user->email)
+            ->queue(new PengajuanBssNotification('ditolak', $pengajuanBss));
+
+        return redirect()->route('admin.bak.pengajuan-bss')->with('status', 'Pengajuan BSS berhasil ditolak');
     }
-
-
 
     public function daftarMahasiswaCuti()
     {
@@ -176,8 +184,13 @@ class BakController extends Controller
                 'suratKeteranganCuti.pengajuanBss',
             ]
         )->find($id);
+        // dd($dataCutiMahasiswa);
         return view('admin_bak.detail_cuti_mahasiswa', [
             'dataCutiMahasiswa' => $dataCutiMahasiswa
         ]);
     }
+
+
+
+
 }

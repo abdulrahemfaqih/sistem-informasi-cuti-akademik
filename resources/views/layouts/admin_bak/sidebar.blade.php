@@ -38,10 +38,7 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link href="{{ route('admin.bak.pengajuan-bss') }}" :active="request()->routeIs([
-                            'admin.bak.pengajuan-bss',
-                            'admin.bak.detail-pengajuan-bss'
-                        ])">
+                        <x-sidebar-link href="{{ route('admin.bak.pengajuan-bss') }}" :active="request()->routeIs(['admin.bak.pengajuan-bss', 'admin.bak.detail-pengajuan-bss'])">
                             <x-sidebar-icon>
 
                                 <path
@@ -58,7 +55,10 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link href="{{ route('admin.bak.daftar-mahasiswa-cuti') }}" :active="request()->is('admin_bak/daftar-mahasiswa-cuti')">
+                        <x-sidebar-link href="{{ route('admin.bak.daftar-mahasiswa-cuti') }}" :active="request()->RouteIs([
+                            'admin.bak.daftar-mahasiswa-cuti',
+                            'admin.bak.detail-mahasiswa-cuti',
+                        ])">
                             <x-sidebar-icon>
                                 <path
                                     d="M8.65063 7.36812C7.78554 6.50781 7.25 5.31645 7.25 4C7.25 2.68355 7.78554 1.49219 8.65063 0.631879C8.15256 0.387327 7.59232 0.25 7 0.25C4.92893 0.25 3.25 1.92893 3.25 4C3.25 6.07107 4.92893 7.75 7 7.75C7.59232 7.75 8.15256 7.61267 8.65063 7.36812Z" />
@@ -75,6 +75,18 @@
 
                             </x-sidebar-icon>
                             <span class="ml-3" sidebar-toggle-item>Daftar Mahasiswa Cuti</span>
+                        </x-sidebar-link>
+                    </li>
+
+                    <li>
+                        <x-sidebar-link href="{{ route('admin.bak.data-tahun-ajaran-semester') }}" :active="request()->routeIs(['admin.bak.data-tahun-ajaran-semester', 'admin.bak.edit-tahun-ajaran', 'admin.bak.edit-semester'])">
+                            <x-sidebar-icon>
+                                <path
+                                    d="M13.5 2c-.178 0-.356.013-.492.022l-.074.005a1 1 0 0 0-.934.998V11a1 1 0 0 0 1 1h7.975a1 1 0 0 0 .998-.934l.005-.074A7.04 7.04 0 0 0 22 10.5 8.5 8.5 0 0 0 13.5 2Z" />
+                                <path
+                                    d="M11 6.025a1 1 0 0 0-1.065-.998 8.5 8.5 0 1 0 9.038 9.039A1 1 0 0 0 17.975 13H11V6.025Z" />
+                            </x-sidebar-icon>
+                            <span class="ml-3" sidebar-toggle-item>Tahun Ajaran Semester</span>
                         </x-sidebar-link>
                     </li>
 

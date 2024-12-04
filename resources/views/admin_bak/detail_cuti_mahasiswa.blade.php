@@ -9,46 +9,69 @@
         @endphp
         <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-        <div class="px-3 mt-6">
-            {{-- <h2 class="mb-4 text-xl font-semibold text-gray-700">Detail Cuti Mahasiswa</h2> --}}
-
-            {{-- Informasi Mahasiswa --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                    <h3 class="mb-2 font-medium text-gray-600">Informasi Mahasiswa</h3>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <p><strong>Nama:</strong> {{ $dataCutiMahasiswa->mahasiswa->nama }}</p>
-                        <p><strong>NIM:</strong> {{ $dataCutiMahasiswa->mahasiswa->nim }}</p>
-                        <p><strong>Program Studi:</strong> {{ $dataCutiMahasiswa->mahasiswa->prodi->nama }}</p>
-                        <p><strong>Email:</strong> {{ $dataCutiMahasiswa->mahasiswa->user->email }}</p>
+        <div class="px-3 mt-6 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white  rounded-lg overflow-hidden">
+                    <div class="px-4 py-3 border-b border-black">
+                        <h3 class="text-lg font-semibold text-gray-700">Informasi Mahasiswa</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Nama</span>
+                            <span>{{ $dataCutiMahasiswa->mahasiswa->user->name }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">NIM</span>
+                            <span>{{ $dataCutiMahasiswa->mahasiswa->nim }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Program Studi</span>
+                            <span>{{ $dataCutiMahasiswa->mahasiswa->prodi->nama }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Email</span>
+                            <span>{{ $dataCutiMahasiswa->mahasiswa->user->email }}</span>
+                        </div>
                     </div>
                 </div>
 
-                {{-- Informasi Cuti --}}
-                <div>
-                    <h3 class="mb-2 font-medium text-gray-600">Informasi Cuti</h3>
-                    <div class="bg-gray-50 p-4 rounded-lg">
-                        <p><strong>Tahun Akademik:</strong> {{ $dataCutiMahasiswa->tahunAjaran->nama }}</p>
-                        <p><strong>Semester:</strong> {{ $dataCutiMahasiswa->semester->nama }}</p>
-                        <p><strong>Status Cuti:</strong>
-                            <span
-                                class="{{ $dataCutiMahasiswa->status == 'disetujui' ? 'text-green-600' : 'text-red-600' }}">
-                                {{ ucfirst($dataCutiMahasiswa->status) }}
-                            </span>
-                        </p>
+                <div class="bg-white  rounded-lg overflow-hidden">
+                    <div class="px-4 py-3 border-b border-black">
+                        <h3 class="text-lg font-semibold text-gray-700">Informasi Cuti</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Tahun Akademik Cuti</span>
+                            <span>{{ $dataCutiMahasiswa->tahunAjaran->tahun_ajaran }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Semester Cuti</span>
+                            <span>{{ $dataCutiMahasiswa->semester->semester }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Tahun Akademik Kembali</span>
+                            <span>{{ $dataCutiMahasiswa->suratKeteranganCuti->tahunAjaran->tahun_ajaran }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Semester Kembali</span>
+                            <span>{{ $dataCutiMahasiswa->suratKeteranganCuti->semester->semester }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Detail Surat Keterangan Cuti --}}
-            <div class="mb-6">
-                <h3 class="mb-2 font-medium text-gray-600">Surat Keterangan Cuti</h3>
-                <div class="bg-gray-50 p-4 rounded-lg">
+            {{-- Surat Keterangan Cuti --}}
+            <div class="bg-white  rounded-lg overflow-hidden">
+                <div class="px-4 py-3 border-b border-black">
+                    <h3 class="text-lg font-semibold text-gray-700">Surat Keterangan Cuti</h3>
+                </div>
+                <div class="p-4 flex justify-between items-center">
                     @if ($dataCutiMahasiswa->suratKeteranganCuti)
-                        <p><strong>Nomor Surat:</strong> {{ $dataCutiMahasiswa->suratKeteranganCuti->nomor_surat }}</p>
-                        <p><strong>Tanggal Surat:</strong>
-                            {{ $dataCutiMahasiswa->suratKeteranganCuti->tanggal_surat }}</p>
-                        <p><strong>Alasan Cuti:</strong> {{ $dataCutiMahasiswa->suratKeteranganCuti->alasan_cuti }}</p>
+                        <p>{{ $dataCutiMahasiswa->suratKeteranganCuti->nama_file }}</p>
+                        <a href="{{ asset('storage/' . $dataCutiMahasiswa->suratKeteranganCuti->path_file) }}"
+                            class="text-blue-600 hover:text-blue-800 transition-colors" target="_blank">
+                            Lihat Dokumen
+                        </a>
                     @else
                         <p class="text-yellow-600">Tidak ada surat keterangan cuti.</p>
                     @endif
@@ -56,23 +79,30 @@
             </div>
 
             {{-- Pengajuan BSS --}}
-            <div>
-                <h3 class="mb-2 font-medium text-gray-600">Informasi Pengajuan BSS</h3>
-                <div class="bg-gray-50 p-4 rounded-lg">
+            <div class="bg-white  rounded-lg overflow-hidden">
+                <div class="px-4 py-3 border-b border-black">
+                    <h3 class="text-lg font-semibold text-gray-700">Informasi Pengajuan BSS</h3>
+                </div>
+                <div class="p-4 space-y-3">
                     @if ($dataCutiMahasiswa->suratKeteranganCuti && $dataCutiMahasiswa->suratKeteranganCuti->pengajuanBss)
                         @php
                             $pengajuanBss = $dataCutiMahasiswa->suratKeteranganCuti->pengajuanBss;
                         @endphp
-                        <p><strong>Nomor Pengajuan:</strong> {{ $pengajuanBss->nomor_pengajuan }}</p>
-                        <p><strong>Tanggal Pengajuan:</strong> {{ $pengajuanBss->tanggal_pengajuan }}
-                        </p>
-                        <p><strong>Status Pengajuan:</strong>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Tanggal Pengajuan</span>
+                            <span>{{ $pengajuanBss->diajukan_pada }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Status Pengajuan</span>
                             <span
                                 class="{{ $pengajuanBss->status == 'disetujui' ? 'text-green-600' : 'text-red-600' }}">
                                 {{ ucfirst($pengajuanBss->status) }}
                             </span>
-                        </p>
-                        <p><strong>Catatan:</strong> {{ $pengajuanBss->catatan ?? 'Tidak ada catatan' }}</p>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600 font-medium">Catatan</span>
+                            <span>{{ $pengajuanBss->catatan ?? 'Tidak ada catatan' }}</span>
+                        </div>
                     @else
                         <p class="text-yellow-600">Tidak ada informasi pengajuan BSS.</p>
                     @endif
@@ -80,7 +110,7 @@
             </div>
 
             {{-- Tombol Kembali --}}
-            <div class="mt-6 flex justify-end">
+            <div class="flex justify-start">
                 <a href="{{ route('admin.bak.daftar-mahasiswa-cuti') }}"
                     class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 transition-colors">
                     Kembali ke Daftar Mahasiswa Cuti
