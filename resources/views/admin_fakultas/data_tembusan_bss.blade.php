@@ -1,4 +1,4 @@
-<x-adminfakultas-layout>
+<x-admin-fakultas-layout>
     <div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full mb-1 p-4">
             <div class="mb-4">
@@ -51,12 +51,15 @@
                                         </p>
                                     </td>
                                     <td class="px-4 py-1.5 whitespace-nowrap text-sm">
-                                        <a href="{{ route('admin.fakultas.download-bss', $item->id) }}"
-                                            class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg focus:outline-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                            </svg>
-                                         </a>
+                                        <form action="{{ route('admin.fakultas.download-bss', $item->id) }}" method="GET" class="inline-block">
+                                            @csrf
+                                            <button type="submit" class="inline-flex items-center px-4 py-1.5 text-sm font-medium text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 rounded-lg focus:outline-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 pr-2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                                </svg>
+                                                Cetak
+                                            </button>
+                                        </form>
                                     </td>
 
                                 </tr>
@@ -71,4 +74,4 @@
             </div>
         </div>
     </div>
-</x-adminfakultas-layout>
+</x-admin-fakultas-layout>
