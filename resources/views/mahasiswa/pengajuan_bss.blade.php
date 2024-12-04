@@ -7,159 +7,183 @@
 
     <div class="flex flex-col gap-4 mx-3 my-6">
       <div class="items-center justify-end flex md:divide-x md:divide-gray-100">
-        <!-- Modal toggle -->
-        <button data-modal-target="ajukanBss-modal" data-modal-toggle="ajukanBss-modal"
-          class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          type="button">
-          Ajukan BSS
-        </button>
-
-        @if ($semesterAktif)
-          <!-- Main modal -->
-          <div id="ajukanBss-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-2xl max-h-full">
-              <!-- Modal content -->
-              <form method="POST" action="{{ route('mahasiswa.bss.store') }}">
-                @csrf
-                <input type="hidden" name="semester_id" value="{{ $semesterAktif->id }}">
-                <input type="hidden" name="tahun_ajaran_id" value="{{ $semesterAktif->tahunAjaran->id }}">
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                  <!-- Modal header -->
-                  <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                      Ajukan Berhenti Studi Sementara (BSS)
-                    </h3>
-                    <button type="button"
-                      class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                      data-modal-hide="ajukanBss-modal">
-                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                      </svg>
-                      <span class="sr-only">Close modal</span>
-                    </button>
-                  </div>
-                  <!-- Modal body -->
-                  <div class="p-4 md:p-5 space-y-4">
-                    <div>
-                      <div class="shadow shadow-gray-200 mb-4">
-                        <dl>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">NIM</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->nim }}
-                            </dd>
-                          </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">Nama</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->user->name }}
-                            </dd>
-                          </div>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">Fakultas</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->prodi->fakultas->nama }}
-                            </dd>
-                          </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->prodi->nama }}
-                            </dd>
-                          </div>
-                          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">Tahun Ajaran</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ $semesterAktif->tahunAjaran->tahun_ajaran }}
-                            </dd>
-                          </div>
-                          <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
-                            <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ $semesterAktif->semester }}
-                            </dd>
-                          </div>
-                        </dl>
-                      </div>
-                    </div>
-                    <div>
-                      <label for="alasan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alasan
-                        Berhenti Studi</label>
-                      <textarea id="alasan" name="alasan" rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Masukkan alasan berhenti studi sementara" minlength="10" maxlength="255" required></textarea>
-                      @error('alasan')
-                        <p class="text-red-500 text-sm">{{ $message }}</p>
-                      @enderror
-                    </div>
-                    <div
-                      class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
-                      role="alert">
-                      <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                          d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                      </svg>
-                      <span class="sr-only">Info</span>
-                      <div>
-                        <span class="font-medium">Peringatan!</span> Mohon periksa kembali data Anda sebelum yakin untuk
-                        melanjutkan pengajuan Beasiswa Siswa (BSS)!
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Modal footer -->
-                  <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button type="submit"
-                      class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                      <svg class="me-1 -ms-1 w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="m7 16 4-4-4-4m6 8 4-4-4-4" />
-                      </svg>
-                      Lanjutkan
-                    </button>
-                    <button data-modal-hide="ajukanBss-modal" type="button"
-                      class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
-                  </div>
-                </div>
-              </form>
+        @if ($sudahMengajukan)
+          <div
+            class="flex items-center p-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800 w-full"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Pemberitahuan!</span> Silahkan lengkapi data pengajuan Beasiswa Siswa (BSS),
+              jika sudah, silahkan tunggu konfirmasi persetujuan dari pihak BAK.
             </div>
           </div>
         @else
-          <div id="ajukanBss-modal" tabindex="-1"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-md max-h-full">
-              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <button type="button"
-                  class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                  data-modal-hide="ajukanBss-modal">
-                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                  </svg>
-                  <span class="sr-only">Close modal</span>
-                </button>
-                <div class="p-4 md:p-5 text-center">
-                  <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                    Mohon maaf, Anda tidak dapat mengajukan BSS karena periode pengajuan BSS telah berakhir.
-                  </h3>
-                  <button data-modal-hide="ajukanBss-modal" type="button"
-                    class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                    Tutup
+          <!-- Modal toggle -->
+          <button data-modal-target="ajukanBss-modal" data-modal-toggle="ajukanBss-modal"
+            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button">
+            Ajukan BSS
+          </button>
+
+          @if ($semesterAktif)
+            <!-- Main modal -->
+            <div id="ajukanBss-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div class="relative p-4 w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <form method="POST" action="{{ route('mahasiswa.bss.store') }}">
+                  @csrf
+                  <input type="hidden" name="semester_id" value="{{ $semesterAktif->id }}">
+                  <input type="hidden" name="tahun_ajaran_id" value="{{ $semesterAktif->tahunAjaran->id }}">
+                  <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <!-- Modal header -->
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                      <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Ajukan Berhenti Studi Sementara (BSS)
+                      </h3>
+                      <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="ajukanBss-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                          viewBox="0 0 14 14">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                      </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-4 md:p-5 space-y-4">
+                      <div>
+                        <div class="shadow shadow-gray-200 mb-4">
+                          <dl>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">NIM</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ auth()->user()->mahasiswa->nim }}
+                              </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">Nama</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ auth()->user()->mahasiswa->user->name }}
+                              </dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">Fakultas</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ auth()->user()->mahasiswa->prodi->fakultas->nama }}
+                              </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ auth()->user()->mahasiswa->prodi->nama }}
+                              </dd>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">Tahun Ajaran</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ $semesterAktif->tahunAjaran->tahun_ajaran }}
+                              </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                              <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
+                              <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
+                                {{ $semesterAktif->semester }}
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </div>
+                      <div>
+                        <label for="alasan"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alasan
+                          Berhenti Studi</label>
+                        <select id="alasan" name="alasan"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          required>
+                          <option value="">Pilih Alasan</option>
+                          <option value="1">Sakit dan perlu istirahat/perawatan</option>
+                          <option value="2">Kerja Praktek/Dinas</option>
+                          <option value="3">Keperluan lain yang bersifat pribadi</option>
+                        </select>
+                        @error('alasan')
+                          <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                      </div>
+                      <div
+                        class="flex items-center p-4 mb-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800"
+                        role="alert">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path
+                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Info</span>
+                        <div>
+                          <span class="font-medium">Peringatan!</span> Mohon periksa kembali data Anda sebelum yakin
+                          untuk
+                          melanjutkan pengajuan Beasiswa Siswa (BSS)!
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                      <button type="submit"
+                        class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        <svg class="me-1 -ms-1 w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                          width="24" height="24" fill="none" viewBox="0 0 24 24">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m7 16 4-4-4-4m6 8 4-4-4-4" />
+                        </svg>
+                        Lanjutkan
+                      </button>
+                      <button data-modal-hide="ajukanBss-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          @else
+            <div id="ajukanBss-modal" tabindex="-1"
+              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+              <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  <button type="button"
+                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="ajukanBss-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
                   </button>
+                  <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                      Mohon maaf, Anda tidak dapat mengajukan BSS karena periode pengajuan BSS telah berakhir.
+                    </h3>
+                    <button data-modal-hide="ajukanBss-modal" type="button"
+                      class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                      Tutup
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          @endif
         @endif
       </div>
 
@@ -215,7 +239,7 @@
                 {{ $bss->tahunAjaran->tahun_ajaran }}</td>
               <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $bss->semester->semester }}
               </td>
-              <td>{{ $bss->alasan }}</td>
+              <td>{{ ($bss->alasan == 1) ? 'Sakit dan perlu istirahat/perawatan' : (($bss->alasan == 2) ? 'Kerja Praktek/Dinas' : 'Keperluan lain yang bersifat pribadi') }}</td>
               <td>{{ $bss->diajukan_pada ?? '-' }}</td>
               <td>{{ $bss->disetujui_pada ?? '-' }}</td>
               <td>{{ $bss->ditolak_pada ?? '-' }}</td>

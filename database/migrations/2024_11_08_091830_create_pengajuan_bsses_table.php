@@ -16,7 +16,7 @@ return new class extends Migration
       $table->ulid('mahasiswa_id');
       $table->ulid('tahun_ajaran_id');
       $table->ulid('semester_id');
-      $table->text('alasan');
+      $table->enum('alasan', [1, 2, 3]);
       $table->text('catatan')->nullable()->default(null);
       $table->date('diajukan_pada')->nullable()->default(null)->nullable()->default(null);
       $table->date('disetujui_pada')->nullable()->default(null);
