@@ -14,6 +14,8 @@ use App\Models\AdminFakultas;
 use Illuminate\Database\Seeder;
 use App\Models\DokumenPendukung;
 use App\Models\TanggunganFakultas;
+use App\Models\TanggunganPerpustakaan;
+use App\Models\TanggunganLab;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -49,6 +51,24 @@ class DatabaseSeeder extends Seeder
                 'email' => 'ilham@gmail.com',
                 'password' => bcrypt('password'),
                 'role' => 'admin_fakultas',
+            ]);
+        }
+        if (User::where('Username', 'fais')->count() === 0){
+            User::create([
+                'name' => 'Pak Shah',
+                'username' => 'fais',
+                'email' => 'fais.shah@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'admin_perpus',
+            ]);
+        }
+        if (User::where('Username', 'qian')->count() === 0){
+            User::create([
+                'name' => 'Pak Qian',
+                'username' => 'qian',
+                'email' => 'fais.qian@gmail.com',
+                'password' => bcrypt('password'),
+                'role' => 'admin_lab',
             ]);
         }
         if (Mahasiswa::count() === 0) {
@@ -96,6 +116,45 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        if (TanggunganPerpustakaan::count() == 0) {
+            $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
+            $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
+        
+            if ($fakultasIds->isNotEmpty()) {
+                foreach ($mahasiswaIds as $key => $mahasiswaId) {
+                    DB::table('tanggungan_perpustakaan')->insert([
+                        'id' => Str::ulid(),
+                        'mahasiswa_id' => $mahasiswaId,
+                        'nama_tanggungan' => 'Peminjaman Barang',
+                        'status' => 'Belum Lunas',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            } else {
+                $this->command->info('Fakultas dengan nama Teknik tidak ditemukan.');
+            }
+        }
+
+        if (TanggunganLab::count() == 0) {
+            $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
+            $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
+        
+            if ($fakultasIds->isNotEmpty()) {
+                foreach ($mahasiswaIds as $key => $mahasiswaId) {
+                    DB::table('tanggungan_lab')->insert([
+                        'id' => Str::ulid(),
+                        'mahasiswa_id' => $mahasiswaId,
+                        'nama_tanggungan' => 'Peminjaman Barang',
+                        'status' => 'Belum Lunas',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            } else {
+                $this->command->info('Fakultas dengan nama Teknik tidak ditemukan.');
+            }
+        }
 
         if (User::where('username', '220411100100')->orWhere('username', '220411100035')->count() === 0) {
             $user1 = User::create([

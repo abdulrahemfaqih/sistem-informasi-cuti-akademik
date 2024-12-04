@@ -37,8 +37,11 @@ class AuthController extends Controller
             case 'admin_bak':
                 return redirect()->route('admin.bak.dashboard');
             case 'admin_fakultas':
-
                 return redirect()->route('admin.fakultas.dashboard');
+            case 'admin_perpus':
+                return redirect()->route('admin.perpus.dashboard');
+            case 'admin_lab':
+                return redirect()->route('admin.lab.dashboard');
             case 'mahasiswa':
                 return redirect()->route('mahasiswa.dashboard');
             default:
