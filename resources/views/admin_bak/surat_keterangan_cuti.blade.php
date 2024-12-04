@@ -26,6 +26,35 @@
         .content table td {
             padding: 5px;
         }
+
+        .ttd {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .ttd div {
+            width: 250px;
+            /* Opsional: untuk membatasi lebar div */
+        }
+
+
+
+        .judul {
+            text-align: center;
+            /* berikan underline */
+            text-decoration: underline;
+            font: bold
+        }
+
+        .nomor {
+            text-align: center;
+        }
+
+        .tembusan {
+            font-size: 10px;
+        }
     </style>
 </head>
 
@@ -33,8 +62,8 @@
 
     <div class="header">
         <!-- Jika Anda ingin menambahkan logo, bisa tambahkan di sini -->
-        <h3>Surat Keterangan Cuti</h3>
-        <p>Nomor: {{ $noSurat }}</p>
+        <h3 class="judul">SURAT IZIN BERHENTI STUDI SEMENTARA (BSS)</h3>
+        <p class="nomor">Nomor: {{ $noSurat }}</p>
     </div>
 
     <div class="content">
@@ -75,9 +104,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $semester }}</td>
-                    <td>Reguler</td>
-                    <td>{{ $tahunAkademik }}</td>
+                    <td style="text-align: center">{{ $semester }}</td>
+                    <td style="text-align: center">Reguler</td>
+                    <td style="text-align: center">{{ $tahunAkademik }}</td>
                 </tr>
         </table>
 
@@ -94,9 +123,9 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{ $semesterKembali }}</td>
-                    <td>Reguler</td>
-                    <td>{{ $tahunAkademikKembali }}</td>
+                    <td style="text-align: center">{{ $semesterKembali }}</td>
+                    <td style="text-align: center">Reguler</td>
+                    <td style="text-align: center">{{ $tahunAkademikKembali }}</td>
                 </tr>
             </tbody>
         </table>
@@ -104,11 +133,26 @@
         <p>Dan melakukan ketentuan - ketentuan yang telah ditetapkan di universitas Trunojoyo Madura. Demikian Surat
             Ijin Berhenti Studi Sementara untuk dipergunakan sebagaimana mestinya</p>
 
-        <p>Bangkalan, {{ $tanggalTerbit }}</p>
-        <p>Wakil Rektor Biro Akademik</p>
-        <br>
-        <p>Supriyanto</p>
-        <p>NIP: 2389472389428</p>
+
+
+        <div class="ttd">
+            <div>
+                <p>Bangkalan, {{ $tanggalTerbit }}</p>
+                <p>Wakil Rektor Biro Akademik</p>
+                <br>
+                <br>
+                <p>Supriyanto</p>
+                <p>NIP: 2389472389428</p>
+            </div>
+        </div>
+
+        <div class="tembusan">
+            <p>Tembusan Kepada Yth</p>
+            <p>1. Wakil Rektor Bidang Akademik</p>
+            <p>2. Dekan Fakultas {{ $fakultas }}</p>
+            <p>3. Ka BUK</p>
+            <p>4. Yang bersangkutan</p>
+        </div>
     </div>
 
 </body>
