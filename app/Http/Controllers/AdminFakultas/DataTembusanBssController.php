@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\AdminFakultas;
 
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\PengajuanBss;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class DataTembusanBssController extends Controller
 {
@@ -18,25 +19,20 @@ class DataTembusanBssController extends Controller
                 if ($search) {
                     $query->whereHas('mahasiswa.user', function ($q) use ($search) {
                         $q->where('name', 'like', '%' . $search . '%');
-                    })
-                    ->orWhere('alasan', 'like', '%' . $search . '%');
+                    });
                 }
             })
-            ->orderBy('disetujui_pada', 'desc')->paginate(15);
+            ->orderBy('disetujui_pada', 'desc')->paginate(10);
 
         return view('admin_fakultas.data_tembusan_bss', compact('tembusan'));
     }
 
     public function downloadPdf($id)
     {
-        // Ambil data pengajuan BSS berdasarkan ID
         $pengajuan = PengajuanBss::with(['mahasiswa.user', 'tahunAjaran', 'semester', 'mahasiswa.prodi'])
             ->findOrFail($id);
 
-        // Generate PDF menggunakan DomPDF
-        $pdf = PDF::loadView('admin_fakultas.surat_tembusan', compact('pengajuan'));
-
-        // Unduh PDF
+        $pdf = Pdf::loadView('admin_fakultas.surat_tembusan', compact('pengajuan'));
         return $pdf->download('surat_tembusan_'.$pengajuan->mahasiswa->user->name.'.pdf');
     }
 }

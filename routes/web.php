@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
       Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss');
       Route::get('/data-tembusan-bss/{id}/download', [DataTembusanBssController::class, 'downloadPdf'])->name('admin.fakultas.download-bss');
       Route::get('/data-tanggungan', [DataTanggunganController::class, 'dataTanggungan'])->name('admin.fakultas.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganController::class, 'downloadPdf'])->name('admin.fakultas.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganController::class, 'lunaskanData'])->name('admin.fakultas.lunaskan');
   });
 });
 

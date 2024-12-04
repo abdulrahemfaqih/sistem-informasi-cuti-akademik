@@ -20,8 +20,6 @@ return new class extends Migration
             $table->foreign('fakultas_id')->references('id')->on('fakultas');
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->timestamps();
-            $table->foreign('fakultas_id')->references('id')->on('fakultas');
-            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
         });
     }
 
