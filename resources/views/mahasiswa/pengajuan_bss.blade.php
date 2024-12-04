@@ -7,7 +7,22 @@
 
     <div class="flex flex-col gap-4 mx-3 my-6">
       <div class="items-center justify-end flex md:divide-x md:divide-gray-100">
-        @if ($sudahMengajukan)
+        @if ($sudahDisetujui)
+          <div
+            class="flex items-center p-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800 w-full"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Pemberitahuan!</span> Pengajuan Beasiswa Siswa (BSS) Anda telah disetujui, Anda
+              sekarang masuk dalam masa berhenti studi sementara.
+            </div>
+          </div>
+        @elseif ($sudahMengajukan)
           <div
             class="flex items-center p-4 text-sm text-yellow-800 border border-yellow-300 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300 dark:border-yellow-800 w-full"
             role="alert">
@@ -139,8 +154,8 @@
                         class="inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                         <svg class="me-1 -ms-1 w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                           width="24" height="24" fill="none" viewBox="0 0 24 24">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m7 16 4-4-4-4m6 8 4-4-4-4" />
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m7 16 4-4-4-4m6 8 4-4-4-4" />
                         </svg>
                         Lanjutkan
                       </button>
@@ -239,7 +254,9 @@
                 {{ $bss->tahunAjaran->tahun_ajaran }}</td>
               <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $bss->semester->semester }}
               </td>
-              <td>{{ ($bss->alasan == 1) ? 'Sakit dan perlu istirahat/perawatan' : (($bss->alasan == 2) ? 'Kerja Praktek/Dinas' : 'Keperluan lain yang bersifat pribadi') }}</td>
+              <td>
+                {{ $bss->alasan == 1 ? 'Sakit dan perlu istirahat/perawatan' : ($bss->alasan == 2 ? 'Kerja Praktek/Dinas' : 'Keperluan lain yang bersifat pribadi') }}
+              </td>
               <td>{{ $bss->diajukan_pada ?? '-' }}</td>
               <td>{{ $bss->disetujui_pada ?? '-' }}</td>
               <td>{{ $bss->ditolak_pada ?? '-' }}</td>

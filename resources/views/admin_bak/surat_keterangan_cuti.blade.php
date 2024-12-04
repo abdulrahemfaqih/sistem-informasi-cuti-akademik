@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 30px;
+            margin: 20px;
         }
 
         h3 {
@@ -15,7 +15,7 @@
         }
 
         .content {
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .content table {

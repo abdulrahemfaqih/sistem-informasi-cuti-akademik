@@ -23,9 +23,10 @@ class MahasiswaController extends Controller
     $pengajuanBss = PengajuanBss::where('mahasiswa_id', auth()->user()->mahasiswa->id)->latest()->get();
     $semesterAktif = Semester::where('status', 'aktif')->first() ?? null;
 
-    $statusList = ['belum lengkap', 'diajukan', 'disetujui'];
+    $statusList = ['belum lengkap', 'diajukan'];
 
     $sudahMengajukan = false;
+    $sudahDisetujui = false;
 
     if ($semesterAktif) {
       $sudahMengajukan = PengajuanBss::where('mahasiswa_id', auth()->user()->mahasiswa->id)
@@ -33,16 +34,26 @@ class MahasiswaController extends Controller
         ->where('semester_id', $semesterAktif->id)
         ->whereIn('status', $statusList)
         ->exists();
+
+      $sudahDisetujui = PengajuanBss::where('mahasiswa_id', auth()->user()->mahasiswa->id)
+        ->where('tahun_ajaran_id', $semesterAktif->tahunAjaran->id)
+        ->where('semester_id', $semesterAktif->id)
+        ->where('status', 'disetujui')
+        ->exists();
     }
 
-    return view('mahasiswa.pengajuan_bss', compact('pengajuanBss', 'semesterAktif', 'sudahMengajukan'));
+    return view('mahasiswa.pengajuan_bss', compact('pengajuanBss', 'semesterAktif', 'sudahMengajukan', 'sudahDisetujui'));
   }
 
   public function showBss($IdPengajuanBss)
   {
     $pengajuanBss = PengajuanBss::findOrFail($IdPengajuanBss);
 
-    return view('mahasiswa.detail_pengajuan_bss', compact('pengajuanBss'));
+    if ($pengajuanBss->status === 'diajukan') {
+      return view('mahasiswa.detail_pengajuan_bss', compact('pengajuanBss'));
+    } else {
+      return view('mahasiswa.detail_cuti_mahasiswa', compact('pengajuanBss'));
+    }
   }
 
   public function storeBss(Request $request)

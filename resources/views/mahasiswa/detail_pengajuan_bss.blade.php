@@ -4,7 +4,7 @@
       $breadcrumbs = [
           ['label' => 'Dashboard', 'route' => route('mahasiswa.dashboard')],
           ['label' => 'Pengajuan BSS', 'route' => route('mahasiswa.bss.index')],
-          ['label' => 'Detail Pengajuan BSS'],
+          ['label' => 'Detail'],
       ];
     @endphp
     <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
