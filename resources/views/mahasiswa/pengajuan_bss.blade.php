@@ -61,13 +61,13 @@
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-900">Fakultas</dt>
                             <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->programStudi->fakultas->nama }}
+                              {{ auth()->user()->mahasiswa->prodi->fakultas->nama }}
                             </dd>
                           </div>
                           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
                             <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
-                              {{ auth()->user()->mahasiswa->programStudi->nama }}
+                              {{ auth()->user()->mahasiswa->prodi->nama }}
                             </dd>
                           </div>
                           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -216,7 +216,7 @@
               <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $bss->semester->semester }}
               </td>
               <td>{{ $bss->alasan }}</td>
-              <td>{{ $bss->diajukan_pada }}</td>
+              <td>{{ $bss->diajukan_pada ?? '-' }}</td>
               <td>{{ $bss->disetujui_pada ?? '-' }}</td>
               <td>{{ $bss->ditolak_pada ?? '-' }}</td>
               <td>
