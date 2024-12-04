@@ -27,7 +27,7 @@
                     </li>
                     {{-- Overview --}}
                     <li>
-                        <x-sidebar-link href="{{ route('admin.bak.dashboard') }}" :active="request()->is('admin_bak/dashboard')">
+                        <x-sidebar-link href="{{ route('admin.bak.dashboard') }}" :active="request()->routeIs(['admin.bak.dashboard'])">
                             <x-sidebar-icon>
                                 <path
                                     d="M13.5 2c-.178 0-.356.013-.492.022l-.074.005a1 1 0 0 0-.934.998V11a1 1 0 0 0 1 1h7.975a1 1 0 0 0 .998-.934l.005-.074A7.04 7.04 0 0 0 22 10.5 8.5 8.5 0 0 0 13.5 2Z" />
@@ -38,7 +38,10 @@
                         </x-sidebar-link>
                     </li>
                     <li>
-                        <x-sidebar-link href="{{ route('admin.bak.pengajuan-bss') }}" :active="request()->is('admin_bak/pengajuan-bss')">
+                        <x-sidebar-link href="{{ route('admin.bak.pengajuan-bss') }}" :active="request()->routeIs([
+                            'admin.bak.pengajuan-bss',
+                            'admin.bak.detail-pengajuan-bss'
+                        ])">
                             <x-sidebar-icon>
 
                                 <path
