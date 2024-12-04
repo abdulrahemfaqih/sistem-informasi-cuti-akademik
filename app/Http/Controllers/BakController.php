@@ -120,10 +120,11 @@ class BakController extends Controller
                 'semester' => $dataCuti->semester->semester,
                 'kelas' => "Reguler",
                 'noSurat' => $noSurat,
-                'tanggalTerbit' => now(),
+                'tanggalTerbit' => now()->format('d F Y'),
                 'tahunAkademikKembali' => $tahunAkademikKembali->tahun_ajaran,
                 'semesterKembali' => $semesterKembali->semester,
                 'fakultas' => $dataCuti->mahasiswa->prodi->fakultas->nama,
+
             ]);
 
             $pathFile = 'surat_bss/' . time() . '_surat_keterangan_cuti_' . $nimMahasiswa . '.pdf';
@@ -138,7 +139,7 @@ class BakController extends Controller
                 'path_file' => $pathFile,
                 'tahun_ajaran_masuk_id' => $tahunAkademikKembali->id,
                 'semester_masuk_id' => $semesterKembali->id,
-                'tanggal_terbit' => now()->format('d M Y')
+                'tanggal_terbit' => now()
             ]);
 
             HistoriMahasiswa::create([

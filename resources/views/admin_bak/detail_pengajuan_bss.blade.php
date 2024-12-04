@@ -103,7 +103,7 @@
 
                         <div class="mb-4">
                             <label for="catatan" class="block text-gray-700 font-medium mb-2">Catatan
-                                (Opsional)</label>
+                                </label>
                             <textarea id="catatan" name="catatan" rows="4" class="w-full border border-gray-300 rounded-md p-2" required
                                 placeholder="Masukkan catatan untuk pengajuan"></textarea>
                         </div>
