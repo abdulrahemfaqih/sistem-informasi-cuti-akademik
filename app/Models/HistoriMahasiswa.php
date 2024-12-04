@@ -13,7 +13,6 @@ class HistoriMahasiswa extends Model
 {
     use HasFactory, HasUlids;
 
-
     protected $table = 'histori_mahasiswa';
     protected $guarded = [];
 

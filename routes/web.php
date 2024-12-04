@@ -26,8 +26,9 @@ Route::middleware('auth')->group(function () {
         // pengajuan
         Route::get('/pengajuan-bss', [BakController::class, 'pengajuanBss'])->name('admin.bak.pengajuan-bss');
         Route::get('/pengajuan-bss/{id}', [BakController::class, 'detailPengajuanBss'])->name('admin.bak.detail-pengajuan-bss');
-        Route::patch('/pengajuan-bss/{id}/approve', [BakController::class, 'approvePengajuanBss'])->name('admin.bak.approve-pengajuan-bss');
-        Route::patch('/pengajuan-bss/{id}/reject', [BakController::class, 'rejectPengajuanBss'])->name('admin.bak.reject-pengajuan-bss');
+        Route::patch('/pengajuan-bss/{id}/proses', [BakController::class, 'processPengajuanBss'])->name('admin.bak.process-pengajuan-bss');
+        // Route::patch('/pengajuan-bss/{id}/approve', [BakController::class, 'approvePengajuanBss'])->name('admin.bak.approve-pengajuan-bss');
+        // Route::patch('/pengajuan-bss/{id}/reject', [BakController::class, 'rejectPengajuanBss'])->name('admin.bak.reject-pengajuan-bss');
 
         // daftar mahasiswa cuti
         Route::get('/daftar-mahasiswa-cuti', [BakController::class, 'daftarMahasiswaCuti'])->name('admin.bak.daftar-mahasiswa-cuti');
@@ -84,10 +85,14 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::prefix('mahasiswa')->group(function () {
-        Route::get('/dashboard', [MahasiswaDashboardController::class, 'index'])->name('mahasiswa.dashboard');
-        Route::get('/pengajuan-bss', [MahasiswaController::class, 'pengajuanBss'])->name('mahasiswa.pengajuan-bss');
-    });
+  Route::prefix('mahasiswa')->group(function () {
+    Route::get('/dashboard', [MahasiswaDashboardController::class, 'index'])->name('mahasiswa.dashboard');
+    Route::get('/pengajuan-bss', [MahasiswaController::class, 'indexBss'])->name('mahasiswa.bss.index');
+    Route::post('/ajukan-bss', [MahasiswaController::class, 'storeBss'])->name('mahasiswa.bss.store');
+    Route::get('/data-dokumen/{IdPengajuanBss}/edit', [MahasiswaController::class, 'editBss'])->name('mahasiswa.bss.edit');
+    Route::put('/data-dokumen/{IdPengajuanBss}/update', [MahasiswaController::class, 'updateBss'])->name('mahasiswa.bss.update');
+    Route::get('/data-dokumen/{IdPengajuanBss}/show', [MahasiswaController::class, 'showBss'])->name('mahasiswa.bss.show');
+  });
 });
 
 Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
