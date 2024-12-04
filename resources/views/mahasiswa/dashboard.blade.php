@@ -5,9 +5,9 @@
     @endphp
     <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
-    <div class="grid grid-cols-1 gap-4 xl:grid-cols-2 mx-3 my-6">
+    <div class="grid grid-cols-2 gap-4 mx-3 my-6">
       <a href="{{ route('mahasiswa.bss.index') }}"
-        class="flex items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        class="col-span-2 xl:col-span-1 flex items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 h-fit">
         <svg class="w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
           width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
           <path
@@ -28,6 +28,65 @@
           </p>
         </div>
       </a>
+
+      <div
+        class="col-span-2 xl:col-span-1 flex p-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+        role="alert">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Syarat Pengajuan BSS/Cuti</span>
+          <ul class="mt-1.5 list-disc list-inside">
+            <li>Status akademik mahasiswa aktif;</li>
+            <li>Batas kuota BSS/Cuti setiap mahasiswa adalah 2 (dua) kali;</li>
+            <li>Masa pengajuan BSS/Cuti adalah pada masa KRS.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-span-2 flex p-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+        role="alert">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Tata Cara Pengajuan BSS/Cuti</span>
+          <ul class="mt-1.5 list-disc list-inside">
+            <li>Mahasiswa memilih menu Pengajuan Berhenti Studi Sementara (BSS);</li>
+            <li>Mahasiswa mengklik tombol Ajukan BSS dan memeriksa kembali data dirinya, rentang cuti (tahun ajaran),
+              dan konfirmasi apakah ingin melakukan pengajuan BSS;
+            <li>Setelah mahasiswa mengkonfirmasi dan menekan tombol "Lanjutkan", pengajuan BSS diproses lebih lanjut
+            </li>
+            <li>Jika mahasiswa memenuhi kriteria, sistem akan meminta mahasiswa unduh Surat Permohonan Berhenti Studi
+              Sementara (BSS) untuk diisi kemudian diunggah kembali;</li>
+            <li>Kemudian, mahasiswa diharuskan untuk mengunggah dokumen pendukung yang
+              dibutuhkan, seperti Surat Permohonan BSS, Kartu Mahasiswa, Surat Bebas Tanggungan Fakultas, Surat Bebas
+              Perpustakaan, serta Surat Bebas Tanggungan Laboratorium (jika ada);</li>
+            <li>Sistem akan memverifikasi apakah dokumen yang diunggah sudah lengkap dan valid sebelum melanjutkan ke
+              tahap berikutnya;</li>
+            <li>Setelah semua dokumen diunggah, sistem otomatis mengirimkan notifikasi kepada Biro Akademik dan
+              Kemahasiswaan (BAK);</li>
+            <li>Pihak BAK akan melakukan verifikasi dokumen secara online, memeriksa kelengkapan dan keabsahan dokumen
+              yang diunggah oleh mahasiswa;</li>
+            <li>Jika semua dokumen valid dan lengkap, BAK memberikan persetujuan melalui sistem;</li>
+            <li>Setelah persetujuan diberikan, mahasiswa akan mendapatkan notifikasi bahwa pengajuan BSS telah disetujui
+              atau ditolak;</li>
+            <li>Jika pengajuan BSS disetujui, mahasiswa dapat mengunduh Surat Ijin Berhenti Studi Sementara (BSS) yang
+              telah
+              ditandatangani oleh pihak berwenang;</li>
+            <li>Jika pengajuan BSS ditolak, mahasiswa akan mendapatkan pemberitahuan alasan penolakan pengajuan BSS dan
+              dapat
+              mengajukan kembali pengajuan BSS.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </x-mahasiswa-layout>
