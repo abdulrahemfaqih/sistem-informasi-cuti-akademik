@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('tanggungan_fakultas', function (Blueprint $table) {
             $table->ulid('id');
-            $table->ulid('fakultas_id');
             $table->ulid('mahasiswa_id');
+            $table->ulid('fakultas_id');
             $table->string('nama_tanggungan');
-            $table->enum('status', ['lunas', 'belum lunas']);
+            $table->enum('status', ['Lunas', 'Belum Lunas']);
+            $table->foreign('fakultas_id')->references('id')->on('fakultas');
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa');
             $table->timestamps();
         });
     }

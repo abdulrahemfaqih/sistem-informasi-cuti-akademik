@@ -22,6 +22,6 @@ class ProgramStudi extends Model
 
     public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Mahasiswa::class, 'program_studi_id');
     }
 }

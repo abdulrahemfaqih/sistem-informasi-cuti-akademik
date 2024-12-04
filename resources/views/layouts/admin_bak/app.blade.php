@@ -15,6 +15,7 @@
         rel="stylesheet">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script> --}}
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-800">
@@ -28,7 +29,7 @@
                 {{ $slot }}
             </main>
 
-            @include('layouts.admin_bak.footer')
+            {{-- @include('layouts.admin_bak.footer') --}}
         </div>
     </div>
     <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>

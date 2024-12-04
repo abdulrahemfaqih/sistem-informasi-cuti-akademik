@@ -30,4 +30,9 @@ class HistoriMahasiswa extends Model
     {
         return $this->belongsTo(TahunAjaran::class);
     }
+
+    public function suratKeteranganCuti()
+    {
+        return $this->belongsTo(SuratKeteranganCuti::class);
+    }
 }

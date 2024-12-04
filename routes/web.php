@@ -11,6 +11,11 @@ use App\Http\Controllers\AdminBak\AdminBakDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaDashboardController;
 use App\Http\Controllers\AdminFakultas\DataTembusanBssController;
 use App\Http\Controllers\AdminFakultas\AdminFakultasDashboardController;
+use App\Http\Controllers\AdminFakultas\DataTanggunganController;
+use App\Http\Controllers\AdminPerpus\AdminPerpusDashboardController;
+use App\Http\Controllers\AdminPerpus\DataTanggunganPerpusController;
+use App\Http\Controllers\AdminLab\AdminLabDashboardController;
+use App\Http\Controllers\AdminLab\DataTanggunganLabController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -24,15 +29,43 @@ Route::middleware('auth')->group(function () {
   Route::prefix('admin_bak')->group(function () {
     Route::get('/dashboard', [BakController::class, 'dashboard'])->name('admin.bak.dashboard');
     Route::get('/pengajuan-bss', [BakController::class, 'pengajuanBss'])->name('admin.bak.pengajuan-bss');
+    Route::get('/pengajuan-bss/{id}', [BakController::class, 'detailPengajuanBss'])->name('admin.bak.detail-pengajuan-bss');
+    Route::patch('/pengajuan-bss/{id}/approve', [BakController::class, 'approvePengajuanBss'])->name('admin.bak.approve-pengajuan-bss');
+    Route::patch('/pengajuan-bss/{id}/reject', [BakController::class, 'rejectPengajuanBss'])->name('admin.bak.reject-pengajuan-bss');
     Route::get('/daftar-mahasiswa-cuti', [BakController::class, 'daftarMahasiswaCuti'])->name('admin.bak.daftar-mahasiswa-cuti');
+    Route::get('/detail-mahasiswa-cuti/{id}', [BakController::class, 'detailCutiMahasiswa'])->name('admin.bak.detail-mahasiswa-cuti');
   });
 });
 
 
 Route::middleware('auth')->group(function () {
   Route::prefix('admin_fakultas')->group(function () {
-    Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.fakultas.dashboard');
-    Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss-baru');
+      Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.fakultas.dashboard');
+      Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss');
+      Route::get('/data-tembusan-bss/{id}/download', [DataTembusanBssController::class, 'downloadPdf'])->name('admin.fakultas.download-bss');
+      Route::get('/data-tanggungan', [DataTanggunganController::class, 'dataTanggungan'])->name('admin.fakultas.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganController::class, 'downloadPdf'])->name('admin.fakultas.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganController::class, 'lunaskanData'])->name('admin.fakultas.lunaskan');
+  });
+});
+
+
+Route::middleware('auth')->group(function () {
+  Route::prefix('admin_perpus')->group(function () {
+      Route::get('/dashboard', [AdminPerpusDashboardController::class, 'index'])->name('admin.perpus.dashboard');
+      Route::get('/data-tanggungan', [DataTanggunganPerpusController::class, 'dataTanggungan'])->name('admin.perpus.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganPerpusController::class, 'downloadPdf'])->name('admin.perpus.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganPerpusController::class, 'lunaskanData'])->name('admin.perpus.lunaskan');
+  });
+});
+
+
+Route::middleware('auth')->group(function () {
+  Route::prefix('admin_lab')->group(function () {
+      Route::get('/dashboard', [AdminLabDashboardController::class, 'index'])->name('admin.lab.dashboard');
+      Route::get('/data-tanggungan', [DataTanggunganLabController::class, 'dataTanggungan'])->name('admin.lab.tanggungan');
+      Route::get('/data-tanggungan/{id}/download', [DataTanggunganLabController::class, 'downloadPdf'])->name('admin.lab.download-bebas-tanggungan');
+      Route::patch('/data-tanggungan/{id}/lunaskan', [DataTanggunganLabController::class, 'lunaskanData'])->name('admin.lab.lunaskan');
   });
 });
 

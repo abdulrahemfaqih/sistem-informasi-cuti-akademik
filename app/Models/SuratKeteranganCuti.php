@@ -18,4 +18,16 @@ class SuratKeteranganCuti extends Model
     {
         return $this->belongsTo(PengajuanBss::class);
     }
+
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class);
+    }
+
+  public function historiMahasiswa()
+    {
+        return $this->belongsTo(HistoriMahasiswa::class);
+    }
+
+
 }
