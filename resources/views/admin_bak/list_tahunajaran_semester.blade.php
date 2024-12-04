@@ -34,7 +34,10 @@
                         <tbody>
                             @foreach ($tahunAjaran as $ta)
                                 <tr class="border-b hover:bg-gray-50">
-                                    <td class="py-2">{{ $ta->tahun_ajaran }}</td>
+                                    <td class="py-2">
+                                        <span
+                                            class="{{ $ta->status == 'aktif' ? 'bg-green-400' : '' }} px-2 py-1 rounded-lg">{{ $ta->tahun_ajaran }}</span>
+                                    </td>
                                     <td class="py-2">{{ $ta->tanggal_mulai }}</td>
                                     <td class="py-2">{{ $ta->tanggal_selesai }}</td>
                                     <td class="py-2">
@@ -98,7 +101,12 @@
                             @foreach ($semester as $s)
                                 <tr class="border-b hover:bg-gray-50">
                                     <td class="py-2">{{ $s->tahunAjaran->tahun_ajaran }}</td>
-                                    <td class="py-2">{{ $s->semester }}</td>
+                                    <td class="py-2">
+                                        <span
+                                            class="{{ $s->status == 'aktif' ? 'bg-green-400' : '' }} px-2 py-1 rounded-lg">
+                                            {{ $s->semester }}</span>
+
+                                    </td>
                                     <td class="py-2">{{ $s->tanggal_mulai }}</td>
                                     <td class="py-2">{{ $s->tanggal_selesai }}</td>
                                     <td class="py-2">

@@ -85,7 +85,6 @@ class BakController extends Controller
 
         if ($semesterKembali->semester == "Ganjil") {
             $semesterKembali = Semester::where('semester', 'Genap')->where('tahun_ajaran_id', $dataCuti->tahun_ajaran_id)->first();
-            dd($semesterKembali);
         } elseif ($semesterKembali->semester == "Genap") {
             $tahunAkademikKembali = TahunAjaran::where('created_at', '>', $dataCuti->tahunAjaran->created_at)->first();
             $semesterKembali = Semester::where('semester', 'ganjil')->where('tahun_ajaran_id', $tahunAkademikKembali->id)->first();

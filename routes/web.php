@@ -4,11 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BakController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TahunAkademikController;
 use App\Http\Controllers\Mahasiswa\MahasiswaController;
+use App\Http\Controllers\AdminFakultas\DataTanggunganController;
 use App\Http\Controllers\Mahasiswa\MahasiswaDashboardController;
 use App\Http\Controllers\AdminFakultas\DataTembusanBssController;
 use App\Http\Controllers\AdminFakultas\AdminFakultasDashboardController;
-use App\Http\Controllers\AdminFakultas\DataTanggunganController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
