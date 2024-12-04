@@ -19,7 +19,23 @@ class BakController extends Controller
     public function dashboard()
     {
 
-        return view('admin_bak.dashboard', []);
+        $pengajuanStudi = PengajuanBss::with(['tahunAjaran', 'semester', 'mahasiswa'])
+            ->select('tahun_ajaran_id', 'semester_id')
+            ->selectRaw('COUNT(DISTINCT mahasiswa_id) as jumlah')
+            ->groupBy('tahun_ajaran_id', 'semester_id')
+            ->get();
+
+
+        $cutiMahasiswa = HistoriMahasiswa::with(['tahunAjaran', 'semester'])
+            ->where('status', 'cuti')
+            ->selectRaw('tahun_ajaran_id, semester_id, COUNT(*) as jumlah')
+            ->groupBy('tahun_ajaran_id', 'semester_id')
+            ->get();
+        // Kirim data ke view
+        return view('admin_bak.dashboard', [
+            'pengajuanStudi' => $pengajuanStudi,
+            'cutiMahasiswa' => $cutiMahasiswa
+        ]);
     }
 
     public function pengajuanBss()
