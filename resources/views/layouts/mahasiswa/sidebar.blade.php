@@ -37,7 +37,7 @@
             </x-sidebar-link>
           </li>
           <li>
-            <x-sidebar-link href="{{ route('mahasiswa.pengajuan-bss') }}" :active="request()->is('mahasiswa/pengajuan-bss')">
+            <x-sidebar-link href="{{ route('mahasiswa.bss.index') }}" :active="request()->is('mahasiswa/pengajuan-bss')">
               <x-sidebar-icon>
 
                 <path

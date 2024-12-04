@@ -40,7 +40,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
   Route::prefix('mahasiswa')->group(function () {
     Route::get('/dashboard', [MahasiswaDashboardController::class, 'index'])->name('mahasiswa.dashboard');
-    Route::get('/pengajuan-bss', [MahasiswaController::class, 'pengajuanBss'])->name('mahasiswa.pengajuan-bss');
+    Route::get('/pengajuan-bss', [MahasiswaController::class, 'indexBss'])->name('mahasiswa.bss.index');
+    Route::post('/ajukan-bss', [MahasiswaController::class, 'storeBss'])->name('mahasiswa.bss.store');
+    Route::get('/data-dokumen/{IdPengajuanBss}/edit', [MahasiswaController::class, 'editBss'])->name('mahasiswa.bss.edit');
+    Route::put('/data-dokumen/{IdPengajuanBss}/update', [MahasiswaController::class, 'updateBss'])->name('mahasiswa.bss.update');
+    Route::get('/data-dokumen/{IdPengajuanBss}/show', [MahasiswaController::class, 'showBss'])->name('mahasiswa.bss.show');
   });
 });
 

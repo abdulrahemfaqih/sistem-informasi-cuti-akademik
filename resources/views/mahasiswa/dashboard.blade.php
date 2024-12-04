@@ -6,7 +6,7 @@
     <x-breadcrumbs :breadcrumbs="$breadcrumbs" />
 
     <div class="grid grid-cols-1 gap-4 xl:grid-cols-2 mx-3 my-6">
-      <a href="{{ route('mahasiswa.pengajuan-bss') }}"
+      <a href="{{ route('mahasiswa.bss.index') }}"
         class="flex items-center gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <svg class="w-[48px] h-[48px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
           width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

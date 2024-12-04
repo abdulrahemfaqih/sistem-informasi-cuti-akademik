@@ -18,7 +18,7 @@ class Mahasiswa extends Model
     protected $guarded = [];
 
 
-    public function prodi()
+    public function programStudi()
     {
         return $this->belongsTo(ProgramStudi::class);
     }
