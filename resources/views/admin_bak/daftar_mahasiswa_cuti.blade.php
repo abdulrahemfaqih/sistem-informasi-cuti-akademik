@@ -13,6 +13,11 @@
                     <tr>
                         <th>
                             <span class="flex items-center">
+                                No
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
                                 NIM
                             </span>
                         </th>
@@ -34,8 +39,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($daftarMahasiswaCuti as $mhs)
+                    @forelse ($daftarMahasiswaCuti as $index => $mhs)
                         <tr>
+                            <td>{{ $index + 1}}</td>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{ $mhs->mahasiswa->nim }}
                             </td>

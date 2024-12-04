@@ -14,7 +14,17 @@
                     <tr>
                         <th>
                             <span class="flex items-center">
-                                Mahasiswa
+                                No
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                NIM
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Nama Mahasiswa
                             </span>
                         </th>
                         <th>
@@ -40,11 +50,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($pengajuanBss as $bss)
+                    @forelse ($pengajuanBss as $index => $bss)
                         <tr>
+                            <td >{{$index + 1}}</td>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $bss->mahasiswa->nim }}
+                            </td>
+                            <td >
                                 {{ $bss->mahasiswa->user->name }}
                             </td>
+                            {{-- <td>{{ $bss->mahasiswa->prodi->nama }}</td> --}}
                             <td>{{ $bss->mahasiswa->prodi->nama }}</td>
                             <td>{{ $bss->tahunAjaran->tahun_ajaran }} {{$bss->semester->semester}}</td>
                             <td>{{$bss->diajukan_pada}}</td>
@@ -53,6 +68,7 @@
                             </td>
                         </tr>
                     @empty
+                        <p class="text-center">Tidak ada data</p>
                     @endforelse
 
                 </tbody>
@@ -62,5 +78,4 @@
 
 
     </div>
-    <script></script>
 </x-adminbak-layout>

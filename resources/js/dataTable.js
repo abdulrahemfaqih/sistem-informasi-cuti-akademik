@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             perPage: 10,
             perPageSelect: [5, 10, 20, 50],
             firstLast: true,
+
         });
     }
 });

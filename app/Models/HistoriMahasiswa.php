@@ -34,7 +34,6 @@ class HistoriMahasiswa extends Model
 
     public function suratKeteranganCuti()
     {
-        return $this->belongsTo(SuratKeteranganCuti::class, 'fk_surat_keterangan_cuti');
+        return $this->belongsTo(SuratKeteranganCuti::class);
     }
-
 }
