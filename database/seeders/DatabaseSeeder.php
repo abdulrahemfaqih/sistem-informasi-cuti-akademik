@@ -4,15 +4,18 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Fakultas;
+use App\Models\Semester;
 use App\Models\Mahasiswa;
-use App\Models\AdminFakultas;
-use App\Models\DokumenPendukung;
+use App\Models\TahunAjaran;
+use Illuminate\Support\Str;
 use App\Models\PengajuanBss;
 use App\Models\ProgramStudi;
-use App\Models\Semester;
-use App\Models\TahunAjaran;
+use App\Models\AdminFakultas;
 use Illuminate\Database\Seeder;
+use App\Models\DokumenPendukung;
+use App\Models\TanggunganFakultas;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -26,7 +29,6 @@ class DatabaseSeeder extends Seeder
         if (TahunAjaran::count() === 0 && Semester::count() === 0) {
             $this->call(TahunAjaranSemesterSeeder::class);
         }
-
         if (Fakultas::count() === 0) {
             $this->call(FakprogSeeder::class);
         }
@@ -62,7 +64,7 @@ class DatabaseSeeder extends Seeder
                         'program_studi_id' => $prodi->id,
                     ]);
 
-                    // Perbarui progress bar setiap kali data mahasiswa dibuat
+                    // Perbarui progress bar setiap ka  li data mahasiswa dibuat
                     if ($i % 10 === 0) {
                         $this->command->getOutput()->progressAdvance(10);
                     }
@@ -72,10 +74,27 @@ class DatabaseSeeder extends Seeder
             $this->command->getOutput()->progressFinish();
             $this->command->info("Selesai mengisi data mahasiswa.");
         }
-
-
-
-        // seeder untuk mahasiswa dan email asli
+    
+        if (TanggunganFakultas::count() == 0) {
+            $mahasiswaIds = Mahasiswa::pluck('id')->random(20);
+            $fakultasIds = Fakultas::where('nama', 'Teknik')->pluck('id');
+        
+            if ($fakultasIds->isNotEmpty()) {
+                foreach ($mahasiswaIds as $key => $mahasiswaId) {
+                    DB::table('tanggungan_fakultas')->insert([
+                        'id' => Str::ulid(),
+                        'mahasiswa_id' => $mahasiswaId,
+                        'fakultas_id' => $fakultasIds->random(),
+                        'nama_tanggungan' => 'Tunggakan UKT',
+                        'status' => 'Belum Lunas',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            } else {
+                $this->command->info('Fakultas dengan nama Teknik tidak ditemukan.');
+            }
+        }
 
 
         if (User::where('username', '220411100100')->orWhere('username', '220411100035')->count() === 0) {
@@ -115,8 +134,6 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user2->id,
             ]);
         }
-
-
 
         if (PengajuanBss::count() === 0 && DokumenPendukung::count() === 0) {
             $this->call(PengajuanBssDokumenPendukungSeeder::class);

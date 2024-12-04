@@ -25,30 +25,28 @@
                             </div>
                         </form>
                     </li>
-                    <li>
-                        <x-sidebar-link href="{{ route('admin.fakultas.dashboard') }}" :active="request()->is('admin_fakultas/dashboard')">
-                            <x-sidebar-icon>
-                                <path
-                                    d="M13.5 2c-.178 0-.356.013-.492.022l-.074.005a1 1 0 0 0-.934.998V11a1 1 0 0 0 1 1h7.975a1 1 0 0 0 .998-.934l.005-.074A7.04 7.04 0 0 0 22 10.5 8.5 8.5 0 0 0 13.5 2Z" />
-                                <path
-                                    d="M11 6.025a1 1 0 0 0-1.065-.998 8.5 8.5 0 1 0 9.038 9.039A1 1 0 0 0 17.975 13H11V6.025Z" />
-                            </x-sidebar-icon>
-                            <span class="ml-3" sidebar-toggle-item>Dashboard</span>
-                        </x-sidebar-link>
-                    </li>
 
                     <li>
-                        <x-sidebar-link href="{{ route('admin.fakultas.data-tembusan-bss-baru') }}" :active="request()->is('admin_fakultas/tembusanBSS*')">
+                        <x-sidebar-link href="{{ route('admin.fakultas.data-tembusan-bss') }}" :active="request()->is('admin_fakultas/tembusanBSS*')">
                             <x-sidebar-icon>
                                 <path d="M1 6v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2Zm2-1h18a1 1 0 0 1 .992.876L12 11.798 2.008 5.876A1 1 0 0 1 3 5Zm18 14H3a1 1 0 0 1-1-1V7.095l9.91 5.911a1 1 0 0 0 1.018 0L22 7.095V18a1 1 0 0 1-1 1Z" />
                             </x-sidebar-icon>
                             <span class="ml-3" sidebar-toggle-item>Tembusan BSS</span>
                         </x-sidebar-link>
                     </li>
+
+                    <li>
+                        <x-sidebar-link href="{{ route('admin.fakultas.tanggungan') }}" :active="request()->is('admin_fakultas/tembusanBSS*')">
+                            <x-sidebar-icon>
+                                <path d="M1 6v12a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H3a2 2 0 0 0-2 2Zm2-1h18a1 1 0 0 1 .992.876L12 11.798 2.008 5.876A1 1 0 0 1 3 5Zm18 14H3a1 1 0 0 1-1-1V7.095l9.91 5.911a1 1 0 0 0 1.018 0L22 7.095V18a1 1 0 0 1-1 1Z" />
+                            </x-sidebar-icon>
+                            <span class="ml-3" sidebar-toggle-item>Tanggungan</span>
+                        </x-sidebar-link>
+                    </li>
                 </ul>
 
                 {{-- Sidebar Footer --}}
-                <div class="pt-2 space-y-2">
+                {{-- <div class="pt-2 space-y-2">
                     <x-sidebar-link href="#">
                         <x-sidebar-icon>
                             <path
@@ -56,7 +54,7 @@
                         </x-sidebar-icon>
                         <span class="ml-3" sidebar-toggle-item>Notifikasi</span>
                     </x-sidebar-link>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
