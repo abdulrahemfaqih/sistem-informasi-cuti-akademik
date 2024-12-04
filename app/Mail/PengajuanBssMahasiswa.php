@@ -9,32 +9,28 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PengajuanBssNotification extends Mailable implements ShouldQueue
+class PengajuanBssMahasiswa extends Mailable
 {
     use Queueable, SerializesModels;
-
-
-
-    public $status;
-    public $pengajuanBss;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($status, $pengajuanBss)
+
+     public $pengajuanBss;
+    public function __construct($pengajuanBss)
     {
-        $this->status = $status;
         $this->pengajuanBss = $pengajuanBss;
     }
+
 
     /**
      * Get the message envelope.
      */
     public function envelope(): Envelope
     {
-        $subject = $this->status == 'disetujui' ? 'Pemberitahuan Pengajuan BSS Disetujui' : 'Pemberitahuan Pengajuan BSS Ditolak';
         return new Envelope(
-            subject: $subject,
+            subject: 'Pengajuan Bss Mahasiswa',
         );
     }
 
@@ -43,18 +39,16 @@ class PengajuanBssNotification extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
-
-        $view = $this->status == 'disetujui' ? 'emails.pengajuan_bss_disetujui' : 'emails.pengajuan_bss_ditolak';
         return new Content(
-            view: $view,
+            view: 'emails.pengajuan_bss_diajukan',
             with: [
                 'nim' => $this->pengajuanBss->mahasiswa->nim,
                 'nama' => $this->pengajuanBss->mahasiswa->user->name,
-                'prodi' => $this->pengajuanBss->mahasiswa->prodi->nama_prodi,
+                'prodi' => $this->pengajuanBss->mahasiswa->prodi->nama,
                 'tahunAkademik' => $this->pengajuanBss->tahunAjaran->tahun_ajaran,
                 'semester' => $this->pengajuanBss->semester->semester,
                 'alasan' => $this->pengajuanBss->alasan,
-                'tanggalPengajuan' => $this->pengajuanBss->diajukan_pada,
+                'tanggalDiajukan' => $this->pengajuanBss->diajukan_pada,
             ]
         );
     }

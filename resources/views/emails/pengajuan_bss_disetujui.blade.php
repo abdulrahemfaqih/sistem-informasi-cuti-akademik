@@ -1,17 +1,64 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+    <title>Pengajuan BSS Disetujui</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
 <body>
-    <h2>Selamat!</h2>
-    <p>Pengajuan Berhenti Studi Sementara (BSS) Anda telah DISETUJUI.</p>
+    <div class="container">
+        <div class="header">
+            <h2>Pengajuan BSS Disetujui</h2>
+        </div>
+        <div class="content">
+            <p>Selamat, Pengajuan BSS (Berhenti Studi Sementara) Anda telah DISETUJUI.</p>
 
-    <h3>Detail Pengajuan:</h3>
-    <ul>
-        <li>NIM: {{ $nim }}</li>
-        <li>Nama: {{ $nama }}</li>
-        <li>Tahun Akademik: {{ $tahunAkademik }}</li>
-        <li>Semester: {{ $semester }}</li>
-    </ul>
+            <div class="details">
+                <h3>Detail Mahasiswa</h3>
+                <p><strong>Nama:</strong> {{ $nama }}</p>
+                <p><strong>NIM:</strong> {{ $nim }}</p>
+                <p><strong>Program Studi:</strong> {{ $prodi }}</p>
 
-    <p>Silakan menghubungi bagian akademik untuk informasi lebih lanjut.</p>
+                <h3>Detail Pengajuan</h3>
+                <p><strong>Tahun Akademik:</strong> {{ $tahunAkademik }}</p>
+                <p><strong>Semester:</strong> {{ $semester }}</p>
+                <p><strong>Tanggal Pengajuan:</strong> {{ $tanggalPengajuan }}</p>
+
+                <h3>Alasan Pengajuan</h3>
+                <p>{{ $alasan }}</p>
+            </div>
+
+            <p style="margin-top: 20px;">Silahkan Login ke sistem untuk melihat surat BSS anda.</p>
+        </div>
+    </div>
 </body>
+
 </html>

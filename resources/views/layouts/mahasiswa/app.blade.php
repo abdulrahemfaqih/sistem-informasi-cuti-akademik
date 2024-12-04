@@ -47,7 +47,7 @@
       @include('layouts.mahasiswa.footer')
     </div>
   </div>
-  <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script>
+  {{-- <script src="https://flowbite-admin-dashboard.vercel.app//app.bundle.js"></script> --}}
 </body>
 
 </html>

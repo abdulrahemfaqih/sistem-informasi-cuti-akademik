@@ -74,7 +74,6 @@
                             </td>
                         </tr>
                     @empty
-                        <p class="text-center">Tidak ada data</p>
                     @endforelse
 
                 </tbody>

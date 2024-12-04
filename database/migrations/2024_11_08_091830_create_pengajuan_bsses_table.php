@@ -18,7 +18,7 @@ return new class extends Migration
             $table->ulid('semester_id');
             $table->text('alasan');
             $table->text('catatan')->nullable()->default(null);
-            $table->date('diajukan_pada');
+            $table->date('diajukan_pada')->nullable()->default(null);
             $table->date('disetujui_pada')->nullable()->default(null);
             $table->date('ditolak_pada')->nullable()->default(null);
             $table->text('alasan_penolakan')->nullable()->default(null);
