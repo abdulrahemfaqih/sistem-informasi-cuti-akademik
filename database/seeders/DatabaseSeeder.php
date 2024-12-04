@@ -116,8 +116,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-
-
         if (PengajuanBss::count() === 0 && DokumenPendukung::count() === 0) {
             $this->call(PengajuanBssDokumenPendukungSeeder::class);
         }

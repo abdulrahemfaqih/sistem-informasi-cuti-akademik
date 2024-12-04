@@ -20,7 +20,7 @@ class Mahasiswa extends Model
 
     public function prodi()
     {
-        return $this->belongsTo(ProgramStudi::class);
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_id');
     }
 
     public function user()

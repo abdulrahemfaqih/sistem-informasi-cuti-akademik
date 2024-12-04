@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminBak\AdminBakDashboardController;
 use App\Http\Controllers\Mahasiswa\MahasiswaDashboardController;
 use App\Http\Controllers\AdminFakultas\DataTembusanBssController;
 use App\Http\Controllers\AdminFakultas\AdminFakultasDashboardController;
+use App\Http\Controllers\AdminFakultas\DataTanggunganController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -31,8 +32,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
   Route::prefix('admin_fakultas')->group(function () {
-    Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.fakultas.dashboard');
-    Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss-baru');
+      Route::get('/dashboard', [AdminFakultasDashboardController::class, 'index'])->name('admin.fakultas.dashboard');
+      Route::get('/data-tembusan-bss', [DataTembusanBssController::class, 'dataTembusanBss'])->name('admin.fakultas.data-tembusan-bss');
+      Route::get('/data-tembusan-bss/{id}/download', [DataTembusanBssController::class, 'downloadPdf'])->name('admin.fakultas.download-bss');
+      Route::get('/data-tanggungan', [DataTanggunganController::class, 'dataTanggungan'])->name('admin.fakultas.tanggungan');
   });
 });
 
