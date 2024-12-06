@@ -108,7 +108,7 @@
                               </dd>
                             </div>
                             <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                              <dt class="text-sm font-medium text-gray-900">Program Studi</dt>
+                              <dt class="text-sm font-medium text-gray-900">Semester</dt>
                               <dd class="mt-1 text-sm text-gray-500 font-semibold sm:col-span-2">
                                 {{ $semesterAktif->semester }}
                               </dd>
@@ -333,7 +333,7 @@
                               stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                           </svg>
                           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Mohon maaf, pengajuan BSS Anda belum lengkap. Silakan ulangi pengajuan BSS Anda.
+                            {{ $bss->catatan ?? '-' }}
                           </h3>
                           <button data-modal-hide="alasan-modal-{{ $bss->id }}" type="button"
                             class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
